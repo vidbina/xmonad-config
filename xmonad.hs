@@ -1,6 +1,10 @@
 import XMonad
+import XMonad.Config.Desktop
 
-main = xmonad $ def {
-  borderWidth = 2,
-  terminal = "urxvt,"
-}
+baseConfig = desktopConfig
+
+main = xmonad $ baseConfig
+    { terminal = "urxvt"
+    ,  borderWidth = 2
+    ,  modMask = mod4Mask
+    }
