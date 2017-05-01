@@ -1,10 +1,26 @@
 import XMonad
 import XMonad.Config.Desktop
+import XMonad.Layout.Gaps
+import XMonad.Util.Run
 
-baseConfig = desktopConfig
+main = do
+	xmproc <- spawnPipe myStatusBar
+	xmonad
+--		$ defaultConfig
+		$ myConfig xmproc
 
-main = xmonad $ baseConfig
-    { terminal = "urxvt"
-    ,  borderWidth = 2
-    ,  modMask = mod4Mask
-    }
+myConfig p = def
+	{ borderWidth = myBorderWidth
+	, modMask = myModMask
+	, terminal = myTerminal
+	}
+
+-- tools
+myStatusBar = "xmobar -x0"
+myTerminal = "urxvt"
+
+-- bindings
+myModMask = mod4Mask
+
+-- features
+myBorderWidth = 2
