@@ -14,7 +14,7 @@ myConfig p = def
 	{ borderWidth = myBorderWidth
 	, modMask = myModMask
 	, terminal = myTerminal
-	, layoutHook = myGaps $ myWindowSpacing $ tiled
+	, layoutHook = myLayoutHook
 	}
 
 -- tools
@@ -26,9 +26,12 @@ myModMask = mod4Mask
 
 -- features
 myBorderWidth = 2
-myUpperGap = 38
+myUpperGap = 34
 
 myGaps = gaps [(U,myUpperGap)]
 myWindowSpacing = spacing 10
 mySpacingTiling = Tall 1 (5/100) (1/2)
-tiled = ResizableTall 1 (2/100) (1/3) []
+
+myGappedSplitPaneWithLargeMasterLayout = myGaps $ myWindowSpacing $ ResizableTall 1 (2/100) (1/3) []
+
+myLayoutHook = myGappedSplitPaneWithLargeMasterLayout
