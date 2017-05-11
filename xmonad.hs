@@ -15,10 +15,6 @@ myConfig p = def
 	, modMask = myModMask
 	, terminal = myTerminal
 	, layoutHook = myGaps $ myWindowSpacing $ tiled
-	-- , layoutHook = gaps [(U,18), (R,23), (L,23), (D,18)] $ tiled ||| Full
-	-- , layoutHook = avoidStruts $ tiled -- defaultConfig
-	--  $ Tall 1 (3/100) (1/2) ||| Full
-	--, layoutHook = avoidStruts $ layoutHook defaultConfig-- spacing 4 Tail 1 (3/100) (1/2) --gaps [(U, myUpperGap)]
 	}
 
 -- tools
