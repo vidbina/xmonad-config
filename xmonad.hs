@@ -4,6 +4,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Gaps
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
+import XMonad.Layout.Tabbed
 import XMonad.Util.Run(spawnPipe)
 
 main = do
@@ -26,12 +27,15 @@ myModMask = mod4Mask
 
 -- features
 myBorderWidth = 2
-myUpperGap = 34
+myUpperGap = 32
 
 myGaps = gaps [(U,myUpperGap)]
+myTabs = tabbed shrinkText def
+
 myWindowSpacing = spacing 10
 mySpacingTiling = Tall 1 (5/100) (1/2)
 
-myGappedSplitPaneWithLargeMasterLayout = myGaps $ myWindowSpacing $ ResizableTall 1 (2/100) (1/3) []
+mySpacedSplitWithLargeMasterLayout = myGaps $ myWindowSpacing $ ResizableTall 1 (2/100) (1/3) []
+myTabbedLayout = myTabs
 
-myLayoutHook = myGappedSplitPaneWithLargeMasterLayout
+myLayoutHook = mySpacedSplitWithLargeMasterLayout ||| myTabbedLayout
