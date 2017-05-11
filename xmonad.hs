@@ -8,15 +8,17 @@ import XMonad.Util.Run(spawnPipe)
 
 main = do
 	xmproc <- spawnPipe myStatusBar
-	xmonad
---		$ defaultConfig
-		$ myConfig xmproc
+	xmonad $ myConfig xmproc
 
 myConfig p = def
 	{ borderWidth = myBorderWidth
 	, modMask = myModMask
 	, terminal = myTerminal
-	, layoutHook = myGaps $ myWindowSpacing $ Full -- tiled
+	, layoutHook = myGaps $ myWindowSpacing $ tiled
+	-- , layoutHook = gaps [(U,18), (R,23), (L,23), (D,18)] $ tiled ||| Full
+	-- , layoutHook = avoidStruts $ tiled -- defaultConfig
+	--  $ Tall 1 (3/100) (1/2) ||| Full
+	--, layoutHook = avoidStruts $ layoutHook defaultConfig-- spacing 4 Tail 1 (3/100) (1/2) --gaps [(U, myUpperGap)]
 	}
 
 -- tools
