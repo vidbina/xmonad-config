@@ -8,7 +8,8 @@ import XMonad.Layout.Tabbed
 import XMonad.Util.Run(spawnPipe)
 
 main = do
-	xmproc <- spawnPipe myStatusBar
+	xmproc <- spawnPipe myXmobar -- myStatusBar
+	--xmonad $ myConfig myXmobar -- statBar
 	xmonad $ myConfig xmproc
 
 myConfig p = def
@@ -19,7 +20,11 @@ myConfig p = def
 	}
 
 -- tools
-myStatusBar = "xmobar -x0"
+myXmobar = "xmobar -x0"
+myDzen = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
+myConky = "conky -c /home/vid/.config/conky/conky.conf"
+myStatusBar = myConky ++ " | " ++ myDzen
+--myStatusBar = myXmobar ++ " | " ++ myDzen
 myTerminal = "urxvt"
 
 -- bindings
@@ -27,15 +32,20 @@ myModMask = mod4Mask
 
 -- features
 myBorderWidth = 2
-myUpperGap = 32
-
+myUpperGap = 28
+-- NOTE: signatures, just as a reminder
+-- gaps :: GapSpec -> l a -> ModifiedLayout Gaps l a
+-- tabbed :: (Eq a, Shrinker s) => s -> Theme -> ModifiedLayout (Decoration TabbedDecoration s) Simplest a
+-- mySpacing :: Int -> l a -> ModifiedLayout Spacing l a
+-- LayoutClass ResizableTall
 myGaps = gaps [(U,myUpperGap)]
 myTabs = tabbed shrinkText def
+mySpacing = spacing 10
+myResizable = ResizableTall 1 (2/100) (1/3) []
 
-myWindowSpacing = spacing 10
-mySpacingTiling = Tall 1 (5/100) (1/2)
+-- myTiling = Tall 1 (5/100) (1/2)
 
-mySpacedSplitWithLargeMasterLayout = myGaps $ myWindowSpacing $ ResizableTall 1 (2/100) (1/3) []
+mySpacedSplitWithLargeMasterLayout = mySpacing $ myResizable
 myTabbedLayout = myTabs
 
-myLayoutHook = mySpacedSplitWithLargeMasterLayout ||| myTabbedLayout
+myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout ||| myTabbedLayout
