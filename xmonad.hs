@@ -8,9 +8,10 @@ import XMonad.Layout.Tabbed
 import XMonad.Util.Run(spawnPipe)
 
 main = do
-	xmproc <- spawnPipe myXmobar -- myStatusBar
+	statusBar <- spawnPipe myXmobar -- myStatusBar
+	statPane <- spawnPipe myConky
 	--xmonad $ myConfig myXmobar -- statBar
-	xmonad $ myConfig xmproc
+	xmonad $ myConfig statPane
 
 myConfig p = def
 	{ borderWidth = myBorderWidth
