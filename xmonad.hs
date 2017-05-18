@@ -42,7 +42,7 @@ myUpperGap = 28
 myGaps = gaps [(U,myUpperGap)]
 myTabs = tabbed shrinkText def
 mySpacing = spacing 10
-myResizable = ResizableTall 1 (2/100) (1/3) []
+myResizable = ResizableTall 1 (2/100) (2/3) []
 
 -- myTiling = Tall 1 (5/100) (1/2)
 
