@@ -40,13 +40,15 @@ myUpperGap = 28
 -- mySpacing :: Int -> l a -> ModifiedLayout Spacing l a
 -- LayoutClass ResizableTall
 myGaps = gaps [(U,myUpperGap)]
-myTabs = tabbed shrinkText def
+-- myTabs = tabbed shrinkText def
 mySpacing = spacing 10
 myResizable = ResizableTall 1 (2/100) (2/3) []
 
 -- myTiling = Tall 1 (5/100) (1/2)
 
 mySpacedSplitWithLargeMasterLayout = mySpacing $ myResizable
-myTabbedLayout = myTabs
+-- myTabbedLayout = myTabs
 
-myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout ||| myTabbedLayout
+myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout
+               -- ||| myTabbedLayout
+               ||| Full
