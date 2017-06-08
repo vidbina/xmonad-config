@@ -9,9 +9,9 @@ import XMonad.Util.Run(spawnPipe)
 
 main = do
 	statusBar <- spawnPipe myXmobar -- myStatusBar
-	statPane <- spawnPipe myConky
+	--statPane <- spawnPipe myConky
 	--xmonad $ myConfig myXmobar -- statBar
-	xmonad $ myConfig statPane
+	xmonad $ myConfig statusBar -- statPane
 
 myConfig p = def
 	{ borderWidth = myBorderWidth
@@ -24,7 +24,7 @@ myConfig p = def
 myXmobar = "xmobar -x0"
 myDzen = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 myConky = "conky -c /home/vid/.config/conky/conky.conf"
-myStatusBar = myConky ++ " | " ++ myDzen
+--myStatusBar = myConky ++ " | " ++ myDzen
 --myStatusBar = myXmobar ++ " | " ++ myDzen
 myTerminal = "urxvt"
 
