@@ -1,24 +1,27 @@
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Cross
 import XMonad.Layout.Gaps
+import XMonad.Layout.Mosaic
+import XMonad.Layout.MultiColumns
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
 import XMonad.Util.Run(spawnPipe)
 
 main = do
-	statusBar <- spawnPipe myXmobar -- myStatusBar
-	--statPane <- spawnPipe myConky
-	--xmonad $ myConfig myXmobar -- statBar
-	xmonad $ myConfig statusBar -- statPane
+  statusBar <- spawnPipe myXmobar -- myStatusBar
+  --statPane <- spawnPipe myConky
+  --xmonad $ myConfig myXmobar -- statBar
+  xmonad $ myConfig statusBar -- statPane
 
 myConfig p = def
-	{ borderWidth = myBorderWidth
-	, layoutHook = myLayoutHook
-	, modMask = myModMask
-	, terminal = myTerminal
-	}
+  { borderWidth = myBorderWidth
+  , layoutHook = myLayoutHook
+  , modMask = myModMask
+  , terminal = myTerminal
+  }
 
 -- tools
 myXmobar = "xmobar -x0"
