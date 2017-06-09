@@ -15,9 +15,9 @@ main = do
 
 myConfig p = def
 	{ borderWidth = myBorderWidth
+	, layoutHook = myLayoutHook
 	, modMask = myModMask
 	, terminal = myTerminal
-	, layoutHook = myLayoutHook
 	}
 
 -- tools
