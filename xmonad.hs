@@ -4,6 +4,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Cross
 import XMonad.Layout.Gaps
 import XMonad.Layout.Mosaic
+import XMonad.Layout.MosaicAlt
 import XMonad.Layout.MultiColumns
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
@@ -51,9 +52,14 @@ myResizable = ResizableTall 1 (2/100) (2/3) []
 
 myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
   [
-    ((myModMask, xK_a), sendMessage Taller)
-  , ((myModMask, xK_z), sendMessage Wider)
-  , ((myModMask, xK_r), sendMessage Reset)
+    ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
+  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
+  , ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
+  , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
+  , ((myModMask, xK_r), sendMessage resetAlt)
+--    ((myModMask, xK_a), sendMessage Taller)
+--  , ((myModMask, xK_z), sendMessage Wider)
+--  , ((myModMask, xK_r), sendMessage Reset)
   ]
 
 -- myTiling = Tall 1 (5/100) (1/2)
@@ -68,5 +74,6 @@ myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout
                -- ||| Mirror (multiCol [1] 4 0.01 0.5)
                -- ||| multiCol [1] 4 0.01 0.5
                -- ||| mosaic 2 [3, 2]
-               ||| mosaic 1.5 []
+               -- ||| mosaic 1.5 []
+               ||| MosaicAlt M.empty
                -- ||| Full
