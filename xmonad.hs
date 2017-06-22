@@ -63,4 +63,10 @@ mySpacedSplitWithLargeMasterLayout = mySpacing $ myResizable
 
 myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout
                -- ||| myTabbedLayout
-               ||| Full
+               -- ||| simpleCross
+               -- ||| multiCol [1] 2 0.05 0.5
+               -- ||| Mirror (multiCol [1] 4 0.01 0.5)
+               -- ||| multiCol [1] 4 0.01 0.5
+               -- ||| mosaic 2 [3, 2]
+               ||| mosaic 1.5 []
+               -- ||| Full
