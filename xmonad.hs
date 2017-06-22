@@ -9,6 +9,7 @@ import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
 import XMonad.Util.Run(spawnPipe)
+import qualified Data.Map as M
 
 main = do
   statusBar <- spawnPipe myXmobar -- myStatusBar
@@ -18,6 +19,7 @@ main = do
 
 myConfig p = def
   { borderWidth = myBorderWidth
+  , keys = \c -> myKeys c `M.union` keys defaultConfig c
   , layoutHook = myLayoutHook
   , modMask = myModMask
   , terminal = myTerminal
@@ -46,6 +48,13 @@ myGaps = gaps [(U,myUpperGap)]
 -- myTabs = tabbed shrinkText def
 mySpacing = spacing 10
 myResizable = ResizableTall 1 (2/100) (2/3) []
+
+myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
+  [
+    ((myModMask, xK_a), sendMessage Taller)
+  , ((myModMask, xK_z), sendMessage Wider)
+  , ((myModMask, xK_r), sendMessage Reset)
+  ]
 
 -- myTiling = Tall 1 (5/100) (1/2)
 
