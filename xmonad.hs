@@ -8,6 +8,7 @@ import XMonad.Layout.MosaicAlt
 import XMonad.Layout.MultiColumns
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
+import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
 import XMonad.Util.Run(spawnPipe)
 import qualified Data.Map as M
@@ -72,8 +73,9 @@ myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout
                -- ||| simpleCross
                -- ||| multiCol [1] 2 0.05 0.5
                -- ||| Mirror (multiCol [1] 4 0.01 0.5)
-               -- ||| multiCol [1] 4 0.01 0.5
+               ||| multiCol [1] 4 0.01 0.5
                -- ||| mosaic 2 [3, 2]
                -- ||| mosaic 1.5 []
-               ||| MosaicAlt M.empty
+               -- ||| MosaicAlt M.empty
                -- ||| Full
+               -- ||| spiral (1/2)
