@@ -84,5 +84,5 @@ myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout
                -- ||| mosaic 2 [3, 2]
                -- ||| mosaic 1.5 []
                -- ||| MosaicAlt M.empty
-               -- ||| Full
+               ||| Full
                -- ||| spiral (1/2)
