@@ -51,8 +51,13 @@ myGaps = gaps [(U,myUpperGap)]
 mySpacing = spacing 10
 myResizable = ResizableTall 1 (2/100) (2/3) []
 
-myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
-  [
+audioKeys = [
+    ((0, 0x1008ff12), spawn "amixer -q set Master toggle")
+  , ((0, 0x1008ff11), spawn "amixer -q set Master 10%-")
+  , ((0, 0x1008ff13), spawn "amixer -q set Master 10%+")
+  ]
+
+windowKeys = [
     ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
   , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
   , ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
@@ -62,6 +67,8 @@ myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
 --  , ((myModMask, xK_z), sendMessage Wider)
 --  , ((myModMask, xK_r), sendMessage Reset)
   ]
+myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
+  windowKeys ++ audioKeys
 
 -- myTiling = Tall 1 (5/100) (1/2)
 
