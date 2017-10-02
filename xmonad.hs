@@ -58,13 +58,10 @@ audioKeys = [
   ]
 
 windowKeys = [
-    ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
-  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
-  , ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
   , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
   , ((myModMask, xK_r), sendMessage resetAlt)
---    ((myModMask, xK_a), sendMessage Taller)
---  , ((myModMask, xK_z), sendMessage Wider)
+  , ((myModMask, xK_a), sendMessage MirrorShrink)
+  , ((myModMask, xK_z), setSpacing 0)
 --  , ((myModMask, xK_r), sendMessage Reset)
   ]
 myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
