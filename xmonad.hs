@@ -62,6 +62,7 @@ windowKeys = [
   , ((myModMask, xK_r), sendMessage resetAlt)
   , ((myModMask, xK_a), sendMessage MirrorShrink)
   , ((myModMask, xK_z), setSpacing 0)
+  , ((myModMask .|. shiftMask, xK_z), setSpacing 10)
 --  , ((myModMask, xK_r), sendMessage Reset)
   ]
 myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
