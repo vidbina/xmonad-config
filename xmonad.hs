@@ -7,6 +7,7 @@ import XMonad.Layout.Mosaic
 import XMonad.Layout.MosaicAlt
 import XMonad.Layout.MultiColumns
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.MouseResizableTile
 import XMonad.Layout.Spacing
 import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
@@ -49,7 +50,8 @@ myUpperGap = 28
 myGaps = gaps [(U,myUpperGap)]
 -- myTabs = tabbed shrinkText def
 mySpacing = spacing 10
-myResizable = ResizableTall 1 (2/100) (2/3) []
+--myResizable = ResizableTall 1 (2/100) (2/3) []
+myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement = 2/100, draggerType = BordersDragger }
 
 audioKeys = [
     ((0, 0x1008ff12), spawn "amixer -q set Master toggle")
