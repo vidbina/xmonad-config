@@ -20,9 +20,10 @@ main = do
   --xmonad $ myConfig myXmobar -- statBar
   xmonad $ myConfig statusBar -- statPane
 
-myConfig p = def
+myConfig p = docks def
   { borderWidth = myBorderWidth
   , keys = \c -> myKeys c `M.union` keys defaultConfig c
+  , layoutHook = avoidStruts $ myLayoutHook
   , manageHook = myManageHook
   , modMask = myModMask
   , terminal = myTerminal
@@ -36,42 +37,56 @@ myConky = "conky -c /home/vid/.config/conky/conky.conf"
 --myStatusBar = myXmobar ++ " | " ++ myDzen
 myTerminal = "urxvt"
 
--- bindings
-myModMask = mod4Mask
-
 -- features
 myBorderWidth = 2
-myUpperGap = 28
--- NOTE: signatures, just as a reminder
--- gaps :: GapSpec -> l a -> ModifiedLayout Gaps l a
--- tabbed :: (Eq a, Shrinker s) => s -> Theme -> ModifiedLayout (Decoration TabbedDecoration s) Simplest a
--- mySpacing :: Int -> l a -> ModifiedLayout Spacing l a
--- LayoutClass ResizableTall
-myGaps = gaps [(U,myUpperGap)]
--- myTabs = tabbed shrinkText def
-mySpacing = spacing 10
---myResizable = ResizableTall 1 (2/100) (2/3) []
+spacingSize = 5
+mySpacing = spacing spacingSize
 myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement = 2/100, draggerType = BordersDragger }
 
 myManageHook = composeAll [
     className =? "Pinentry" --> doFloat
   ]
 
-audioKeys = [
-    ((0, 0x1008ff12), spawn "amixer -q set Master toggle")
+-- bindings
+myModMask = mod4Mask
+
+audioKeys =
+  [ ((0, 0x1008ff12), spawn "amixer -q set Master toggle")
   , ((0, 0x1008ff11), spawn "amixer -q set Master 10%-")
   , ((0, 0x1008ff13), spawn "amixer -q set Master 10%+")
   ]
 
-windowKeys = [
+-- Mosaic keybindings
+mosaicKeys =
+  [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
   , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
-  , ((myModMask, xK_r), sendMessage resetAlt)
-  , ((myModMask, xK_a), sendMessage MirrorShrink)
-  , ((myModMask .|. shiftMask, xK_a), sendMessage MirrorExpand)
-  , ((myModMask, xK_z), setSpacing 0)
-  , ((myModMask .|. shiftMask, xK_z), setSpacing 10)
---  , ((myModMask, xK_r), sendMessage Reset)
+--  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
+--  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
   ]
+
+-- ResizableTall keybindings
+mirrorKeys = [
+    ((myModMask, xK_a), sendMessage MirrorShrink)
+  , ((myModMask .|. shiftMask, xK_a), sendMessage MirrorExpand)
+  ]
+
+mouseResizableTallKeys = [
+    ((myModMask, xK_u), sendMessage ShrinkSlave)
+  , ((myModMask, xK_i), sendMessage ExpandSlave)
+  ]
+
+-- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
+windowKeys = [
+    ((myModMask, xK_z), setSpacing 0)
+  , ((myModMask .|. shiftMask, xK_z), setSpacing spacingSize)
+  , ((myModMask, xK_b), sendMessage ToggleStruts)
+  , ((myModMask, xK_r), sendMessage Reset)
+  , ((myModMask .|. shiftMask,  xK_r), sendMessage resetAlt)
+  ]
+  ++ mouseResizableTallKeys
+  -- ++ mosaicKeys
+  -- ++ mirrorKeys
+
 myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
   windowKeys ++ audioKeys
 
@@ -80,7 +95,7 @@ myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
 mySpacedSplitWithLargeMasterLayout = mySpacing $ myResizable
 -- myTabbedLayout = myTabs
 
-myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout
+myLayoutHook = mySpacedSplitWithLargeMasterLayout
                -- ||| myTabbedLayout
                -- ||| simpleCross
                -- ||| multiCol [1] 2 0.05 0.5
@@ -88,6 +103,6 @@ myLayoutHook = myGaps mySpacedSplitWithLargeMasterLayout
                ||| multiCol [1] 4 0.01 0.5
                -- ||| mosaic 2 [3, 2]
                -- ||| mosaic 1.5 []
-               -- ||| MosaicAlt M.empty
+               -- MosaicAlt M.empty
                ||| Full
                -- ||| spiral (1/2)
