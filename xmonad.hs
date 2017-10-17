@@ -23,7 +23,7 @@ main = do
 myConfig p = def
   { borderWidth = myBorderWidth
   , keys = \c -> myKeys c `M.union` keys defaultConfig c
-  , layoutHook = myLayoutHook
+  , manageHook = myManageHook
   , modMask = myModMask
   , terminal = myTerminal
   }
@@ -52,6 +52,10 @@ myGaps = gaps [(U,myUpperGap)]
 mySpacing = spacing 10
 --myResizable = ResizableTall 1 (2/100) (2/3) []
 myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement = 2/100, draggerType = BordersDragger }
+
+myManageHook = composeAll [
+    className =? "Pinentry" --> doFloat
+  ]
 
 audioKeys = [
     ((0, 0x1008ff12), spawn "amixer -q set Master toggle")
