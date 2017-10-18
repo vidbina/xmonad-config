@@ -11,14 +11,13 @@ import XMonad.Layout.MouseResizableTile
 import XMonad.Layout.Spacing
 import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Run
+import XMonad.Hooks.DynamicLog
 import qualified Data.Map as M
 
 main = do
-  statusBar <- spawnPipe myXmobar -- myStatusBar
-  --statPane <- spawnPipe myConky
-  --xmonad $ myConfig myXmobar -- statBar
-  xmonad $ myConfig statusBar -- statPane
+  xmproc <- spawnPipe myXmobar
+  xmonad $ myConfig xmproc
 
 myConfig p = docks def
   { borderWidth = myBorderWidth
@@ -27,14 +26,13 @@ myConfig p = docks def
   , manageHook = myManageHook
   , modMask = myModMask
   , terminal = myTerminal
+  , logHook = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn p }
   }
 
 -- tools
 myXmobar = "xmobar -x0"
 myDzen = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 myConky = "conky -c /home/vid/.config/conky/conky.conf"
---myStatusBar = myConky ++ " | " ++ myDzen
---myStatusBar = myXmobar ++ " | " ++ myDzen
 myTerminal = "urxvt"
 
 -- features
