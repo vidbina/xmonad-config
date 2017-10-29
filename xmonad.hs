@@ -13,6 +13,8 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
 import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageHelpers
+import XMonad.StackSet as W
 import qualified Data.Map as M
 
 main = do
@@ -41,8 +43,12 @@ spacingSize = 5
 mySpacing = spacing spacingSize
 myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement = 2/100, draggerType = BordersDragger }
 
+centeredHalfWidthDialog = W.RationalRect 0.25 0.25 0.5 0.5
+
 myManageHook = composeAll [
     className =? "Pinentry" --> doFloat
+    , (className =? "Firefox" <&&> title =? "File Upload") -->
+      doRectFloat centeredHalfWidthDialog
   ]
 
 -- bindings
