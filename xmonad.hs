@@ -58,6 +58,9 @@ audioKeys =
   [ ((0, 0x1008ff12), spawn "amixer -q set Master toggle")
   , ((0, 0x1008ff11), spawn "amixer -q set Master 10%-")
   , ((0, 0x1008ff13), spawn "amixer -q set Master 10%+")
+  , ((0, 0x1008ff14), spawn "playerctl play-pause") -- play
+  , ((0, 0x1008ff16), spawn "playerctl previous") -- prev
+  , ((0, 0x1008ff17), spawn "playerctl next") -- next
   ]
 
 -- Mosaic keybindings
