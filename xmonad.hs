@@ -49,6 +49,8 @@ myManageHook = composeAll [
     className =? "Pinentry" --> doFloat
     , (className =? "Firefox" <&&> title =? "File Upload") -->
       doRectFloat centeredHalfWidthDialog
+    , (className =? "Firefox" <&&> title =? "Save As") -->
+      doRectFloat centeredHalfWidthDialog
   ]
 
 -- bindings
