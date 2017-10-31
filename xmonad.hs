@@ -43,14 +43,17 @@ spacingSize = 5
 mySpacing = spacing spacingSize
 myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement = 2/100, draggerType = BordersDragger }
 
-centeredHalfWidthDialog = W.RationalRect 0.25 0.25 0.5 0.5
+centeredHalfWidthRect = W.RationalRect 0.25 0.25 0.5 0.5
+doDialogFloat = doRectFloat centeredHalfWidthRect
 
 myManageHook = composeAll [
     className =? "Pinentry" --> doFloat
+    , (stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog") -->
+      doDialogFloat
     , (className =? "Firefox" <&&> title =? "File Upload") -->
-      doRectFloat centeredHalfWidthDialog
+      doDialogFloat
     , (className =? "Firefox" <&&> title =? "Save As") -->
-      doRectFloat centeredHalfWidthDialog
+      doDialogFloat
   ]
 
 -- bindings
