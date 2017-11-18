@@ -56,6 +56,8 @@ myManageHook = composeAll [
       doDialogFloat
     , (className =? "ibus-setup") -->
       doDialogFloat
+    , (stringProperty "WM_NAME" =? "Emoji Choice") -->
+      doFloat
   ]
 
 -- bindings
