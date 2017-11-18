@@ -35,7 +35,7 @@ myConfig p = docks def
 myXmobar = "xmobar -x0"
 myDzen = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 myConky = "conky -c /home/vid/.config/conky/conky.conf"
-myTerminal = "urxvt"
+myTerminal = "termite"
 
 -- features
 myBorderWidth = 2
