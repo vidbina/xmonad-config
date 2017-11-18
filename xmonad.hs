@@ -54,6 +54,8 @@ myManageHook = composeAll [
       doDialogFloat
     , (className =? "Firefox" <&&> title =? "Save As") -->
       doDialogFloat
+    , (className =? "ibus-setup") -->
+      doDialogFloat
   ]
 
 -- bindings
