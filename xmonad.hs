@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Cross
@@ -28,7 +29,8 @@ myConfig p = docks def
   , manageHook = myManageHook
   , modMask = myModMask
   , terminal = myTerminal
-  , logHook = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn p }
+  , logHook = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn p } >>
+    updatePointer (0.9, 0.9) (0, 0)
   }
 
 -- tools
