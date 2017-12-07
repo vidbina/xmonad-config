@@ -7,6 +7,8 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.Mosaic
 import XMonad.Layout.MosaicAlt
 import XMonad.Layout.MultiColumns
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.MouseResizableTile
 import XMonad.Layout.Spacing
@@ -100,6 +102,8 @@ windowKeys = [
   , ((myModMask, xK_b), sendMessage ToggleStruts)
   , ((myModMask, xK_r), sendMessage Reset)
   , ((myModMask .|. shiftMask,  xK_r), sendMessage resetAlt)
+  , ((myModMask, xK_f), sendMessage $ Toggle FULL)
+  , ((myModMask, xK_x), sendMessage $ Toggle MIRROR)
   ]
   ++ mouseResizableTallKeys
   -- ++ mosaicKeys
@@ -118,9 +122,8 @@ myLayoutHook = mySpacedSplitWithLargeMasterLayout
                -- ||| simpleCross
                -- ||| multiCol [1] 2 0.05 0.5
                -- ||| Mirror (multiCol [1] 4 0.01 0.5)
-               ||| multiCol [1] 4 0.01 0.5
+               ||| mkToggle(MIRROR ?? FULL ?? EOT) (multiCol [1] 4 0.01 0.5)
                -- ||| mosaic 2 [3, 2]
                -- ||| mosaic 1.5 []
                -- MosaicAlt M.empty
-               ||| Full
                -- ||| spiral (1/2)
