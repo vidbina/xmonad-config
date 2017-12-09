@@ -76,6 +76,23 @@ audioKeys =
   , ((0, 0x1008ff17), spawn "playerctl next") -- next
   ]
 
+mirrorKeys = [
+    ((myModMask, xK_a), sendMessage MirrorShrink)
+  , ((myModMask .|. shiftMask, xK_a), sendMessage MirrorExpand)
+  ]
+
+spacingKeys = [
+    ((myModMask, xK_z), setSpacing 0)
+  , ((myModMask .|. shiftMask, xK_z), setSpacing spacingSize)
+  ]
+
+toggleKeys = [
+    ((myModMask, xK_f), sendMessage $ Toggle FULL)
+  , ((myModMask, xK_x), sendMessage $ Toggle MIRROR)
+  --, ((myModMask, xK_x), sendMessage $ Toggle NOBORDERS)
+  , ((myModMask .|. shiftMask,  xK_x), sendMessage $ Toggle SMARTBORDERS)
+  ]
+
 -- Mosaic keybindings
 mosaicKeys =
   [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
@@ -85,11 +102,6 @@ mosaicKeys =
   ]
 
 -- ResizableTall keybindings
-mirrorKeys = [
-    ((myModMask, xK_a), sendMessage MirrorShrink)
-  , ((myModMask .|. shiftMask, xK_a), sendMessage MirrorExpand)
-  ]
-
 mouseResizableTallKeys = [
     ((myModMask, xK_u), sendMessage ShrinkSlave)
   , ((myModMask, xK_i), sendMessage ExpandSlave)
@@ -97,14 +109,12 @@ mouseResizableTallKeys = [
 
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 windowKeys = [
-    ((myModMask, xK_z), setSpacing 0)
-  , ((myModMask .|. shiftMask, xK_z), setSpacing spacingSize)
-  , ((myModMask, xK_b), sendMessage ToggleStruts)
+    ((myModMask, xK_b), sendMessage ToggleStruts)
   , ((myModMask, xK_r), sendMessage Reset)
   , ((myModMask .|. shiftMask,  xK_r), sendMessage resetAlt)
-  , ((myModMask, xK_f), sendMessage $ Toggle FULL)
-  , ((myModMask, xK_x), sendMessage $ Toggle MIRROR)
   ]
+  ++ spacingKeys
+  ++ toggleKeys
   ++ mouseResizableTallKeys
   -- ++ mosaicKeys
   -- ++ mirrorKeys
@@ -117,13 +127,22 @@ myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
 mySpacedSplitWithLargeMasterLayout = mySpacing $ myResizable
 -- myTabbedLayout = myTabs
 
-myLayoutHook = mySpacedSplitWithLargeMasterLayout
-               -- ||| myTabbedLayout
-               -- ||| simpleCross
-               -- ||| multiCol [1] 2 0.05 0.5
-               -- ||| Mirror (multiCol [1] 4 0.01 0.5)
-               ||| mkToggle(MIRROR ?? FULL ?? EOT) (multiCol [1] 4 0.01 0.5)
-               -- ||| mosaic 2 [3, 2]
-               -- ||| mosaic 1.5 []
-               -- MosaicAlt M.empty
-               -- ||| spiral (1/2)
+myMultiColumnLayout = (multiCol [1] 4 0.01 0.5)
+mySpacedMultiColumnLayout = mySpacing myMultiColumnLayout
+
+toggles = mkToggle(MIRROR ?? FULL ?? NOBORDERS ?? SMARTBORDERS ?? EOT)
+toggledLayoutsHook = toggles $
+  mySpacedSplitWithLargeMasterLayout |||
+  mySpacedMultiColumnLayout
+
+myLayoutHook = toggledLayoutsHook
+
+-- mySpacedSplitWithLargeMasterLayout
+--                -- ||| myTabbedLayout
+--                -- ||| simpleCross
+--                -- ||| multiCol [1] 2 0.05 0.5
+--                -- ||| Mirror (multiCol [1] 4 0.01 0.5)
+--                -- ||| mosaic 2 [3, 2]
+--                -- ||| mosaic 1.5 []
+--                -- MosaicAlt M.empty
+--                -- ||| spiral (1/2)
