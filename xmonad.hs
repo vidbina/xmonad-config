@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
@@ -107,12 +108,17 @@ mouseResizableTallKeys = [
   , ((myModMask, xK_i), sendMessage ExpandSlave)
   ]
 
+workspaceKeys = [
+    ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
+  ]
+
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 windowKeys = [
     ((myModMask, xK_b), sendMessage ToggleStruts)
   , ((myModMask, xK_r), sendMessage Reset)
   , ((myModMask .|. shiftMask,  xK_r), sendMessage resetAlt)
   ]
+  ++ workspaceKeys
   ++ spacingKeys
   ++ toggleKeys
   ++ mouseResizableTallKeys
