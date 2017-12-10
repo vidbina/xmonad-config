@@ -1,23 +1,23 @@
 import XMonad
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Cross
 import XMonad.Layout.Gaps
 import XMonad.Layout.Mosaic
 import XMonad.Layout.MosaicAlt
+import XMonad.Layout.MouseResizableTile
 import XMonad.Layout.MultiColumns
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.ResizableTile
-import XMonad.Layout.MouseResizableTile
 import XMonad.Layout.Spacing
 import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
-import XMonad.Util.Run
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageHelpers
 import XMonad.StackSet as W
+import XMonad.Util.Run
 import qualified Data.Map as M
 
 main = do
