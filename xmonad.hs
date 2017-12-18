@@ -27,6 +27,8 @@ main = do
 
 myConfig p = docks def
   { borderWidth = myBorderWidth
+  , normalBorderColor = "#1B1D1E"
+  , focusedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
   , focusFollowsMouse = False
   , keys = \c -> myKeys c `M.union` keys defaultConfig c
   , layoutHook = avoidStruts $ myLayoutHook
@@ -44,7 +46,7 @@ myConky = "conky -c /home/vid/.config/conky/conky.conf"
 myTerminal = "termite"
 
 -- features
-myBorderWidth = 2
+myBorderWidth = 3
 spacingSize = 5
 mySpacing = spacing spacingSize
 myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement = 2/100, draggerType = BordersDragger }
