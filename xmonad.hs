@@ -27,6 +27,7 @@ main = do
 
 myConfig p = docks def
   { borderWidth = myBorderWidth
+  , focusFollowsMouse = False
   , keys = \c -> myKeys c `M.union` keys defaultConfig c
   , layoutHook = avoidStruts $ myLayoutHook
   , manageHook = myManageHook
