@@ -87,6 +87,7 @@ mirrorKeys = [
 
 triggerKeys = [
     ((myModMask, xK_Escape), spawn "sleep 0.2; xtrlock-pam -b none")
+  , ((myModMask .|. shiftMask, xK_Escape), spawn "sleep 0.2; xlock")
   , ((0, xK_Print), spawn "sleep 0.2; scrot -d 0.1")
   , ((myModMask, xK_Print), spawn "sleep 0.2; scrot -s")
   ]
