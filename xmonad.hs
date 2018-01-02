@@ -66,7 +66,7 @@ myManageHook = composeAll [
     -- import Data.List
     --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
     , (className =? "VirtualBox") -->
-      doFloat
+      doDialogFloat
     , (className =? ".blueman-manager-wrapped") -->
       doDialogFloat
     , (className =? "ibus-setup") -->
