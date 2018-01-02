@@ -62,6 +62,9 @@ myManageHook = composeAll [
       doDialogFloat
     , (className =? "Firefox" <&&> title =? "Save As") -->
       doDialogFloat
+    -- https://github.com/xmonad/xmonad/issues/146
+    , (className =? "VirtualBox") -->
+      doFloat
     , (className =? "ibus-setup") -->
       doDialogFloat
     , (stringProperty "WM_NAME" =? "Emoji Choice") -->
