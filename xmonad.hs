@@ -85,6 +85,12 @@ mirrorKeys = [
   , ((myModMask .|. shiftMask, xK_a), sendMessage MirrorExpand)
   ]
 
+triggerKeys = [
+    ((myModMask, xK_Escape), spawn "xtrlock-pam -b none")
+  , ((0, xK_Print), spawn "scrot -d 0.1")
+  , ((myModMask, xK_Print), spawn "scrot -s")
+  ]
+
 spacingKeys = [
     ((myModMask, xK_z), setSpacing 0)
   , ((myModMask .|. shiftMask, xK_z), setSpacing spacingSize)
@@ -121,6 +127,7 @@ windowKeys = [
   , ((myModMask, xK_r), sendMessage Reset)
   , ((myModMask .|. shiftMask,  xK_r), sendMessage resetAlt)
   ]
+  ++ triggerKeys
   ++ workspaceKeys
   ++ spacingKeys
   ++ toggleKeys
