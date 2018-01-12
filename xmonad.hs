@@ -54,25 +54,25 @@ myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement 
 centeredHalfWidthRect = W.RationalRect 0.25 0.25 0.5 0.5
 doDialogFloat = doRectFloat centeredHalfWidthRect
 
-myManageHook = composeAll [
-    className =? "Pinentry" --> doFloat
-    , (stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog") -->
-      doDialogFloat
-    , (className =? "Firefox" <&&> title =? "File Upload") -->
-      doDialogFloat
-    , (className =? "Firefox" <&&> title =? "Save As") -->
-      doDialogFloat
-    -- https://github.com/xmonad/xmonad/issues/146
-    -- import Data.List
-    --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
-    , (className =? "VirtualBox") -->
-      doDialogFloat
-    , (className =? ".blueman-manager-wrapped") -->
-      doDialogFloat
-    , (className =? "ibus-setup") -->
-      doDialogFloat
-    , (stringProperty "WM_NAME" =? "Emoji Choice") -->
-      doFloat
+myManageHook = composeAll
+  [ className =? "Pinentry" --> doFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog") -->
+    doDialogFloat
+  , (className =? "Firefox" <&&> title =? "File Upload") -->
+    doDialogFloat
+  , (className =? "Firefox" <&&> title =? "Save As") -->
+    doDialogFloat
+  -- https://github.com/xmonad/xmonad/issues/146
+  -- import Data.List
+  --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
+  , (className =? "VirtualBox") -->
+    doDialogFloat
+  , (className =? ".blueman-manager-wrapped") -->
+    doDialogFloat
+  , (className =? "ibus-setup") -->
+    doDialogFloat
+  , (stringProperty "WM_NAME" =? "Emoji Choice") -->
+    doFloat
   ]
 
 -- bindings
