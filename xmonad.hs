@@ -73,7 +73,7 @@ myManageHook = composeAll
     doDialogFloat
   , (stringProperty "WM_NAME" =? "Emoji Choice") -->
     doFloat
-  ]
+  , manageDocks ]
 
 -- bindings
 myModMask = mod4Mask
