@@ -67,6 +67,8 @@ myManageHook = composeAll
   --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
   , (className =? "VirtualBox") -->
     doDialogFloat
+  , (className =? "Eog") -->
+    doDialogFloat
   , (className =? ".blueman-manager-wrapped") -->
     doDialogFloat
   , (className =? "ibus-setup") -->
