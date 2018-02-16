@@ -53,11 +53,14 @@ myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement 
 
 centeredHalfWidthRect = W.RationalRect 0.25 0.25 0.5 0.5
 doDialogFloat = doRectFloat centeredHalfWidthRect
+doToolbarFloat = doRectFloat $ W.RationalRect 0.025 0.1 0.1 0.5
 
 myManageHook = composeAll
   [ className =? "Pinentry" --> doFloat
   , (stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog") -->
     doDialogFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "toolbox_window") -->
+    doToolbarFloat
   , (className =? "Firefox" <&&> title =? "File Upload") -->
     doDialogFloat
   , (className =? "Firefox" <&&> title =? "Save As") -->
