@@ -78,6 +78,8 @@ myManageHook = composeAll
     doDialogFloat
   , (stringProperty "WM_NAME" =? "Emoji Choice") -->
     doFloat
+  , (stringProperty "WM_NAME" =? "Formula editor" <&&> className =? "FreeCAD") -->
+    doFloat
   , manageDocks ]
 
 -- bindings
