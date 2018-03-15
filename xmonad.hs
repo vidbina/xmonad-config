@@ -70,6 +70,8 @@ myManageHook = composeAll
   --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
   , (className =? "VirtualBox") -->
     doDialogFloat
+  , (className =? "qemu-system-i386") -->
+    doDialogFloat
   , (className =? "Eog") -->
     doDialogFloat
   , (className =? ".blueman-manager-wrapped") -->
