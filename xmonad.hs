@@ -1,5 +1,6 @@
 import XMonad
 import XMonad.Actions.DynamicWorkspaces
+import XMonad.Actions.FloatKeys
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
@@ -140,12 +141,26 @@ workspaceKeys = [
     ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
   ]
 
+floatKeys = [
+    ((myModMask,               xK_d     ), withFocused (keysResizeWindow (-10,-10) (1,1)))
+  , ((myModMask,               xK_s     ), withFocused (keysResizeWindow (10,10) (1,1)))
+  , ((myModMask .|. mod1Mask, xK_h), withFocused (keysMoveWindow (-10, 0)))
+  , ((myModMask .|. mod1Mask, xK_l), withFocused (keysMoveWindow (10, 0)))
+  , ((myModMask .|. mod1Mask, xK_j), withFocused (keysMoveWindow (0, 10)))
+  , ((myModMask .|. mod1Mask, xK_k), withFocused (keysMoveWindow (0, -10)))
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_l), withFocused (keysMoveWindow (100, 0)))
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_j), withFocused (keysMoveWindow (0, 100)))
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_k), withFocused (keysMoveWindow (0, -100)))
+  ]
+
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 windowKeys = [
     ((myModMask, xK_b), sendMessage ToggleStruts)
   , ((myModMask, xK_r), sendMessage Reset)
   , ((myModMask .|. shiftMask,  xK_r), sendMessage resetAlt)
   ]
+  ++ floatKeys
   ++ triggerKeys
   ++ workspaceKeys
   ++ spacingKeys
