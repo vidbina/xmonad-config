@@ -4,6 +4,7 @@ import XMonad.Actions.FloatKeys
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.FloatNext
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Cross
@@ -33,7 +34,7 @@ myConfig p = docks def
   , focusFollowsMouse = False
   , keys = \c -> myKeys c `M.union` keys defaultConfig c
   , layoutHook = avoidStruts $ myLayoutHook
-  , manageHook = myManageHook
+  , manageHook = floatNextHook <+> myManageHook
   , modMask = myModMask
   , terminal = myTerminal
   , logHook = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn p } >>
@@ -142,16 +143,30 @@ workspaceKeys = [
   ]
 
 floatKeys = [
-    ((myModMask,               xK_d     ), withFocused (keysResizeWindow (-10,-10) (1,1)))
-  , ((myModMask,               xK_s     ), withFocused (keysResizeWindow (10,10) (1,1)))
+    ((myModMask, xK_d), withFocused (keysResizeWindow (-10,-10) (1,1)))
+  , ((myModMask .|. shiftMask, xK_d), withFocused (keysResizeWindow (10,10) (1,1)))
+  , ((myModMask, xK_s), withFocused (keysResizeWindow (-10,-10) (0,0)))
+  , ((myModMask .|. shiftMask, xK_s), withFocused (keysResizeWindow (10,10) (0,0)))
+  , ((myModMask, xK_e), toggleFloatNext)
   , ((myModMask .|. mod1Mask, xK_h), withFocused (keysMoveWindow (-10, 0)))
   , ((myModMask .|. mod1Mask, xK_l), withFocused (keysMoveWindow (10, 0)))
   , ((myModMask .|. mod1Mask, xK_j), withFocused (keysMoveWindow (0, 10)))
   , ((myModMask .|. mod1Mask, xK_k), withFocused (keysMoveWindow (0, -10)))
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_l), withFocused (keysMoveWindow (100, 0)))
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_j), withFocused (keysMoveWindow (0, 100)))
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_k), withFocused (keysMoveWindow (0, -100)))
+  , ((myModMask .|. mod1Mask .|. controlMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
+  , ((myModMask .|. mod1Mask .|. controlMask, xK_l), withFocused (keysMoveWindow (100, 0)))
+  , ((myModMask .|. mod1Mask .|. controlMask, xK_j), withFocused (keysMoveWindow (0, 100)))
+  , ((myModMask .|. mod1Mask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
+  -- granual window sizing
+  -- from top-left corner
+  , ((myModMask .|. controlMask .|. shiftMask, xK_k), withFocused (keysResizeWindow (0,10) (0,0)))
+  , ((myModMask .|. controlMask .|. shiftMask, xK_j), withFocused (keysResizeWindow (0,-10) (0,0)))
+  , ((myModMask .|. controlMask .|. shiftMask, xK_h), withFocused (keysResizeWindow (-10,0) (0,0)))
+  , ((myModMask .|. controlMask .|. shiftMask, xK_l), withFocused (keysResizeWindow (10,0) (0,0)))
+  -- from bottom-right corner
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_k), withFocused (keysResizeWindow (0,10) (1,1)))
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_j), withFocused (keysResizeWindow (0,-10) (1,1)))
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_h), withFocused (keysResizeWindow (10,0) (1,1)))
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_l), withFocused (keysResizeWindow (-10,0) (1,1)))
   ]
 
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
