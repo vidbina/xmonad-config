@@ -158,8 +158,8 @@ floatKeys = [
   , ((myModMask .|. mod1Mask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
   -- granual window sizing
   -- from top-left corner
-  , ((myModMask .|. controlMask .|. shiftMask, xK_k), withFocused (keysResizeWindow (0,10) (0,0)))
-  , ((myModMask .|. controlMask .|. shiftMask, xK_j), withFocused (keysResizeWindow (0,-10) (0,0)))
+  , ((myModMask .|. controlMask .|. shiftMask, xK_k), withFocused (keysResizeWindow (0,-10) (0,0)))
+  , ((myModMask .|. controlMask .|. shiftMask, xK_j), withFocused (keysResizeWindow (0,10) (0,0)))
   , ((myModMask .|. controlMask .|. shiftMask, xK_h), withFocused (keysResizeWindow (-10,0) (0,0)))
   , ((myModMask .|. controlMask .|. shiftMask, xK_l), withFocused (keysResizeWindow (10,0) (0,0)))
   -- from bottom-right corner
