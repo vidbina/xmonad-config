@@ -22,6 +22,7 @@ import XMonad.Layout.Tabbed
 import XMonad.StackSet as W
 import XMonad.Util.Run
 import qualified Data.Map as M
+import Data.Ratio ((%))
 
 main = do
   xmproc <- spawnPipe myXmobar
@@ -143,20 +144,23 @@ workspaceKeys = [
   ]
 
 floatKeys = [
-    ((myModMask, xK_d), withFocused (keysResizeWindow (-10,-10) (1,1)))
-  , ((myModMask .|. shiftMask, xK_d), withFocused (keysResizeWindow (10,10) (1,1)))
-  , ((myModMask, xK_s), withFocused (keysResizeWindow (-10,-10) (0,0)))
-  , ((myModMask .|. shiftMask, xK_s), withFocused (keysResizeWindow (10,10) (0,0)))
-  , ((myModMask, xK_e), toggleFloatNext)
+    ((myModMask, xK_s), withFocused (keysResizeWindow (-20, 0) (1%2,1%2)))
+  , ((myModMask .|. controlMask, xK_s), withFocused (keysResizeWindow (20,0) (1%2,1%2)))
+  , ((myModMask, xK_d), withFocused (keysResizeWindow (0, -20) (1%2,1%2)))
+  , ((myModMask .|. controlMask, xK_d), withFocused (keysResizeWindow (0,40) (1%2,1%2)))
+
+  , ((myModMask .|. shiftMask, xK_e), toggleFloatNext)
+
   , ((myModMask .|. mod1Mask, xK_h), withFocused (keysMoveWindow (-10, 0)))
   , ((myModMask .|. mod1Mask, xK_l), withFocused (keysMoveWindow (10, 0)))
   , ((myModMask .|. mod1Mask, xK_j), withFocused (keysMoveWindow (0, 10)))
   , ((myModMask .|. mod1Mask, xK_k), withFocused (keysMoveWindow (0, -10)))
+
   , ((myModMask .|. mod1Mask .|. controlMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
   , ((myModMask .|. mod1Mask .|. controlMask, xK_l), withFocused (keysMoveWindow (100, 0)))
   , ((myModMask .|. mod1Mask .|. controlMask, xK_j), withFocused (keysMoveWindow (0, 100)))
   , ((myModMask .|. mod1Mask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
-  -- granual window sizing
+  -- window sizing
   -- from top-left corner
   , ((myModMask .|. controlMask .|. shiftMask, xK_k), withFocused (keysResizeWindow (0,-10) (0,0)))
   , ((myModMask .|. controlMask .|. shiftMask, xK_j), withFocused (keysResizeWindow (0,10) (0,0)))
