@@ -144,33 +144,26 @@ workspaceKeys = [
   ]
 
 floatKeys = [
+  -- resize width
     ((myModMask, xK_s), withFocused (keysResizeWindow (-20, 0) (1%2,1%2)))
   , ((myModMask .|. controlMask, xK_s), withFocused (keysResizeWindow (20,0) (1%2,1%2)))
+  -- resize height
   , ((myModMask, xK_d), withFocused (keysResizeWindow (0, -20) (1%2,1%2)))
   , ((myModMask .|. controlMask, xK_d), withFocused (keysResizeWindow (0,40) (1%2,1%2)))
 
   , ((myModMask .|. shiftMask, xK_e), toggleFloatNext)
 
+  -- window move
   , ((myModMask .|. mod1Mask, xK_h), withFocused (keysMoveWindow (-10, 0)))
   , ((myModMask .|. mod1Mask, xK_l), withFocused (keysMoveWindow (10, 0)))
   , ((myModMask .|. mod1Mask, xK_j), withFocused (keysMoveWindow (0, 10)))
   , ((myModMask .|. mod1Mask, xK_k), withFocused (keysMoveWindow (0, -10)))
 
+  -- fast window move
   , ((myModMask .|. mod1Mask .|. controlMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
   , ((myModMask .|. mod1Mask .|. controlMask, xK_l), withFocused (keysMoveWindow (100, 0)))
   , ((myModMask .|. mod1Mask .|. controlMask, xK_j), withFocused (keysMoveWindow (0, 100)))
   , ((myModMask .|. mod1Mask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
-  -- window sizing
-  -- from top-left corner
-  , ((myModMask .|. controlMask .|. shiftMask, xK_k), withFocused (keysResizeWindow (0,-10) (0,0)))
-  , ((myModMask .|. controlMask .|. shiftMask, xK_j), withFocused (keysResizeWindow (0,10) (0,0)))
-  , ((myModMask .|. controlMask .|. shiftMask, xK_h), withFocused (keysResizeWindow (-10,0) (0,0)))
-  , ((myModMask .|. controlMask .|. shiftMask, xK_l), withFocused (keysResizeWindow (10,0) (0,0)))
-  -- from bottom-right corner
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_k), withFocused (keysResizeWindow (0,10) (1,1)))
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_j), withFocused (keysResizeWindow (0,-10) (1,1)))
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_h), withFocused (keysResizeWindow (10,0) (1,1)))
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_l), withFocused (keysResizeWindow (-10,0) (1,1)))
   ]
 
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
