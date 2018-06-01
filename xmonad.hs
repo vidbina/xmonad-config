@@ -64,6 +64,10 @@ myManageHook = composeAll
     doDialogFloat
   , (stringProperty "WM_WINDOW_ROLE" =? "toolbox_window") -->
     doToolbarFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog") -->
+    doDialogFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog") -->
+    doDialogFloat
   , (className =? "Firefox" <&&> title =? "File Upload") -->
     doDialogFloat
   , (className =? "Firefox" <&&> title =? "Save As") -->
