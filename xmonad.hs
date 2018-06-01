@@ -126,12 +126,12 @@ toggleKeys = [
   ]
 
 -- Mosaic keybindings
-mosaicKeys =
-  [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
-  , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
---  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
---  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
-  ]
+--mosaicKeys =
+--  [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
+--  , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
+----  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
+----  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
+--  ]
 
 -- ResizableTall keybindings
 mouseResizableTallKeys = [
