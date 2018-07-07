@@ -24,25 +24,35 @@ import XMonad.Util.Run
 import qualified Data.Map as M
 import Data.Ratio ((%))
 
+myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
+myNormalBorderColor   = "#1B1D1E"
+
+vidbinaPP :: PP
+vidbinaPP = def { ppCurrent = xmobarColor "black"  myFocussedBorderColor .
+                    wrap "[" "]"
+                , ppVisible = xmobarColor "black"  myNormalBorderColor   .
+                    wrap "(" ")"
+                , ppUrgent  = xmobarColor "red"    ""
+                , ppTitle   = xmobarColor "green"  ""
+                , ppExtras  = [willFloatNextPP id]
+                }
+
 main = do
   xmproc <- spawnPipe myXmobar
   xmonad $ myConfig xmproc
 
 myConfig p = docks def
   { borderWidth = myBorderWidth
-  , normalBorderColor = "#1B1D1E"
-  , focusedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
+  , normalBorderColor = myNormalBorderColor
+  , focusedBorderColor = myFocussedBorderColor
   , focusFollowsMouse = False
   , keys = \c -> myKeys c `M.union` keys defaultConfig c
   , layoutHook = avoidStruts $ myLayoutHook
   , manageHook = floatNextHook <+> myManageHook
   , modMask = myModMask
   , terminal = myTerminal
-  , logHook = dynamicLogWithPP xmobarPP
-    { ppExtras = [willFloatNextPP id]
-    , ppTitle = xmobarStrip
-    , ppOutput = hPutStrLn p
-    } >> updatePointer (0.9, 0.9) (0, 0)
+  , logHook = dynamicLogWithPP vidbinaPP
+    { ppOutput = hPutStrLn p } >> updatePointer (0.9, 0.9) (0, 0)
   }
 
 -- tools
