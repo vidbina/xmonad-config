@@ -38,8 +38,11 @@ myConfig p = docks def
   , manageHook = floatNextHook <+> myManageHook
   , modMask = myModMask
   , terminal = myTerminal
-  , logHook = dynamicLogWithPP xmobarPP { ppOutput = hPutStrLn p } >>
-    updatePointer (0.9, 0.9) (0, 0)
+  , logHook = dynamicLogWithPP xmobarPP
+    { ppExtras = [willFloatNextPP id]
+    , ppTitle = xmobarStrip
+    , ppOutput = hPutStrLn p
+    } >> updatePointer (0.9, 0.9) (0, 0)
   }
 
 -- tools
@@ -155,7 +158,7 @@ floatKeys = [
   , ((myModMask, xK_d), withFocused (keysResizeWindow (0, -20) (1%2,1%2)))
   , ((myModMask .|. controlMask, xK_d), withFocused (keysResizeWindow (0,40) (1%2,1%2)))
 
-  , ((myModMask .|. shiftMask, xK_e), toggleFloatNext)
+  , ((myModMask .|. shiftMask, xK_e), toggleFloatNext >> runLogHook)
 
   -- window move
   , ((myModMask .|. mod1Mask, xK_h), withFocused (keysMoveWindow (-10, 0)))
