@@ -163,10 +163,10 @@ workspaceKeys = [
 floatKeys = [
   -- resize width
     ((myModMask, xK_s), withFocused (keysResizeWindow (-20, 0) (1%2,1%2)))
-  , ((myModMask .|. controlMask, xK_s), withFocused (keysResizeWindow (20,0) (1%2,1%2)))
+  , ((myModMask .|. shiftMask, xK_s), withFocused (keysResizeWindow (20,0) (1%2,1%2)))
   -- resize height
   , ((myModMask, xK_d), withFocused (keysResizeWindow (0, -20) (1%2,1%2)))
-  , ((myModMask .|. controlMask, xK_d), withFocused (keysResizeWindow (0,40) (1%2,1%2)))
+  , ((myModMask .|. shiftMask, xK_d), withFocused (keysResizeWindow (0,40) (1%2,1%2)))
 
   , ((myModMask .|. shiftMask, xK_e), toggleFloatNext >> runLogHook)
 
