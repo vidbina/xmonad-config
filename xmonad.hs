@@ -30,7 +30,7 @@ myNormalBorderColor   = "#1B1D1E"
 vidbinaPP :: PP
 vidbinaPP = def { ppCurrent = xmobarColor "black"  myFocussedBorderColor .
                     wrap "[" "]"
-                , ppVisible = xmobarColor "black"  myNormalBorderColor   .
+                , ppVisible = xmobarColor myFocussedBorderColor myNormalBorderColor   .
                     wrap "(" ")"
                 , ppUrgent  = xmobarColor "red"    ""
                 , ppTitle   = xmobarColor "green"  ""
