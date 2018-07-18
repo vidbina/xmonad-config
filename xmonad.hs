@@ -96,6 +96,8 @@ myManageHook = composeAll
     doDialogFloat
   , (className =? "Eog") -->
     doDialogFloat
+  , (className =? "feh") -->
+    doDialogFloat
   , (className =? ".blueman-manager-wrapped") -->
     doDialogFloat
   , (className =? "ibus-setup") -->
