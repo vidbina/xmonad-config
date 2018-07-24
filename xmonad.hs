@@ -7,6 +7,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.FloatNext
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.Place
 import XMonad.Layout.Cross
 import XMonad.Layout.Gaps
 import XMonad.Layout.Mosaic
@@ -37,6 +38,9 @@ vidbinaPP = def { ppCurrent = xmobarColor "black"  myFocussedBorderColor .
                 , ppExtras  = [willFloatNextPP id]
                 }
 
+
+myPlacement = withGaps (16,0,16,0) (smart (0.5,0.5))
+
 main = do
   xmproc <- spawnPipe myXmobar
   xmonad $ myConfig xmproc
@@ -48,7 +52,7 @@ myConfig p = docks def
   , focusFollowsMouse = False
   , keys = \c -> myKeys c `M.union` keys defaultConfig c
   , layoutHook = avoidStruts $ myLayoutHook
-  , manageHook = floatNextHook <+> myManageHook
+  , manageHook = placeHook myPlacement <+> floatNextHook <+> myManageHook
   , modMask = myModMask
   , terminal = myTerminal
   , logHook = dynamicLogWithPP vidbinaPP
