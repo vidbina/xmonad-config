@@ -76,41 +76,29 @@ doDialogFloat = doRectFloat centeredHalfWidthRect
 doToolbarFloat = doRectFloat $ W.RationalRect 0.025 0.1 0.1 0.5
 
 myManageHook = composeAll
-  [ className =? "Pinentry" --> doFloat
-  , (stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog") -->
-    doDialogFloat
-  , (stringProperty "WM_WINDOW_ROLE" =? "toolbox_window") -->
-    doToolbarFloat
-  , (stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog") -->
-    doDialogFloat
-  , (stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog") -->
-    doDialogFloat
-  , (className =? "Firefox" <&&> title =? "File Upload") -->
-    doDialogFloat
-  , (className =? "Firefox" <&&> title =? "Save As") -->
-    doDialogFloat
+  [
+    className =? "Pinentry" --> doFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog") --> doDialogFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "toolbox_window") --> doToolbarFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog") --> doDialogFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog") --> doDialogFloat
+  , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
+  , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
   -- https://github.com/xmonad/xmonad/issues/146
   -- import Data.List
   --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
-  , (className =? "VirtualBox") -->
-    doDialogFloat
-  , (className =? "Nm-connection-editor") -->
-    doFloat
-  , (className =? "qemu-system-i386") -->
-    doDialogFloat
-  , (className =? "Eog") -->
-    doDialogFloat
-  , (className =? "feh") -->
-    doDialogFloat
-  , (className =? ".blueman-manager-wrapped") -->
-    doDialogFloat
-  , (className =? "ibus-setup") -->
-    doDialogFloat
-  , (stringProperty "WM_NAME" =? "Emoji Choice") -->
-    doFloat
-  , (stringProperty "WM_NAME" =? "Formula editor" <&&> className =? "FreeCAD") -->
-    doFloat
-  , manageDocks ]
+  , (className =? "VirtualBox") --> doDialogFloat
+  , (className =? "processing-app-Base") --> doDialogFloat
+  , (className =? "Nm-connection-editor") --> doFloat
+  , (className =? "qemu-system-i386") --> doDialogFloat
+  , (className =? "Eog") --> doDialogFloat
+  , (className =? "feh") --> doFloat
+  , (className =? ".blueman-manager-wrapped") --> doDialogFloat
+  , (className =? "ibus-setup") --> doDialogFloat
+  , (stringProperty "WM_NAME" =? "Emoji Choice") --> doFloat
+  , (stringProperty "WM_NAME" =? "Formula editor" <&&> className =? "FreeCAD") --> doFloat
+  , manageDocks
+  ]
 
 -- bindings
 myModMask = mod4Mask
