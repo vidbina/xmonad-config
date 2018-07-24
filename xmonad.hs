@@ -1,3 +1,4 @@
+import Data.Ratio ((%))
 import XMonad
 import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.FloatKeys
@@ -23,7 +24,6 @@ import XMonad.Layout.Tabbed
 import XMonad.StackSet as W
 import XMonad.Util.Run
 import qualified Data.Map as M
-import Data.Ratio ((%))
 
 myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
 myNormalBorderColor   = "#1B1D1E"
