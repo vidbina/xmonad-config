@@ -84,6 +84,7 @@ myManageHook = composeAll
   , (stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog") --> doDialogFloat
   , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
   , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
+  , (className =? "Dialog") --> doDialogFloat
   -- https://github.com/xmonad/xmonad/issues/146
   -- import Data.List
   --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
