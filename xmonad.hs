@@ -9,6 +9,7 @@ import XMonad.Hooks.FloatNext
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.Place
+import XMonad.Hooks.SetWMName
 import XMonad.Layout.Cross
 import XMonad.Layout.Gaps
 import XMonad.Layout.Mosaic
@@ -54,6 +55,7 @@ myConfig p = docks def
   , layoutHook = avoidStruts $ myLayoutHook
   , manageHook = placeHook myPlacement <+> floatNextHook <+> myManageHook
   , modMask = myModMask
+  , startupHook = setWMName "LG3D"
   , terminal = myTerminal
   , logHook = dynamicLogWithPP vidbinaPP
     { ppOutput = hPutStrLn p } >> updatePointer (0.9, 0.9) (0, 0)
