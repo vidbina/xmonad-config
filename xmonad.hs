@@ -86,6 +86,9 @@ myManageHook = composeAll
   , (stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog") --> doDialogFloat
   , (stringProperty "WM_WINDOW_ROLE" =? "gimp-layer-new") --> doDialogFloat
   , (className =? "Gimp") --> doDialogFloat
+  -- Thunderbird
+  , (stringProperty "WM_WINDOW_ROLE" =? "EventDialog" <&&> className =? "Calendar") --> doDialogFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "EventDialog" <&&> className =? "Daily") --> doDialogFloat
   , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
   , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
   , (className =? "Dialog") --> doDialogFloat
