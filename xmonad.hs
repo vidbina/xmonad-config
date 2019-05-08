@@ -103,6 +103,7 @@ myManageHook = composeAll
   , (className =? "feh") --> doFloat
   , (className =? ".blueman-manager-wrapped") --> doDialogFloat
   , (className =? "ibus-setup") --> doDialogFloat
+  , (stringProperty "WM_NAME" =? "Cinelerra-CV: Errors") --> doFloat
   , (stringProperty "WM_NAME" =? "Emoji Choice") --> doFloat
   , (stringProperty "WM_NAME" =? "Media viewer" <&&> className =? "TelegramDesktop") --> doFloat
   , (stringProperty "WM_NAME" =? "Formula editor" <&&> className =? "FreeCAD") --> doFloat
