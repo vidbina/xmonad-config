@@ -89,6 +89,7 @@ myManageHook = composeAll
   -- Thunderbird
   , (stringProperty "WM_WINDOW_ROLE" =? "EventDialog" <&&> className =? "Calendar") --> doDialogFloat
   , (stringProperty "WM_WINDOW_ROLE" =? "EventDialog" <&&> className =? "Daily") --> doDialogFloat
+  , (stringProperty "WM_WINDOW_ROLE" =? "AlarmWindow" <&&> className =? "Daily") --> doDialogFloat
   , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
   , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
   , (className =? "Dialog") --> doDialogFloat
