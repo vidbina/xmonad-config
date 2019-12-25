@@ -29,8 +29,8 @@ import qualified Data.Map as M
 myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
 myNormalBorderColor   = "#1B1D1E"
 
-vidbinaPP :: PP
-vidbinaPP = def { ppCurrent = xmobarColor "black"  myFocussedBorderColor .
+myXmobarPP :: PP
+myXmobarPP = def { ppCurrent = xmobarColor "black"  myFocussedBorderColor .
                     wrap "[" "]"
                 , ppVisible = xmobarColor myFocussedBorderColor myNormalBorderColor   .
                     wrap "(" ")"
@@ -43,8 +43,8 @@ vidbinaPP = def { ppCurrent = xmobarColor "black"  myFocussedBorderColor .
 myPlacement = withGaps (16,0,16,0) (smart (0.5,0.5))
 
 main = do
-  xmproc <- spawnPipe myXmobar
-  xmonad $ myConfig xmproc
+  xmobarPipe <- spawnPipe xmobarCommand
+  xmonad $ myConfig xmobarPipe
 
 myConfig p = docks def
   { borderWidth = myBorderWidth
@@ -56,16 +56,16 @@ myConfig p = docks def
   , manageHook = placeHook myPlacement <+> floatNextHook <+> myManageHook
   , modMask = myModMask
   , startupHook = setWMName "LG3D"
-  , terminal = myTerminal
-  , logHook = dynamicLogWithPP vidbinaPP
+  , terminal = terminalCommand
+  , logHook = dynamicLogWithPP myXmobarPP
     { ppOutput = hPutStrLn p } >> updatePointer (0.9, 0.9) (0, 0)
   }
 
 -- tools
-myXmobar = "xmobar -x0"
-myDzen = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
-myConky = "conky -c /home/vid/.config/conky/conky.conf"
-myTerminal = "urxvtc"
+xmobarCommand = "TZDIR=/etc/zoneinfo xmobar -x0"
+dzenCommand = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
+conkyCommand = "conky -c /home/vid/.config/conky/conky.conf"
+terminalCommand = "urxvtc"
 
 -- features
 myBorderWidth = 3
@@ -163,7 +163,7 @@ mouseResizableTallKeys = [
 
 workspaceKeys = [
     ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
-  ]
+ ]
 
 floatKeys = [
   -- resize width
