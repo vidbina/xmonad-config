@@ -52,7 +52,7 @@ myConfig p = docks def
   , focusedBorderColor = myFocussedBorderColor
   , focusFollowsMouse = False
   , keys = \c -> myKeys c `M.union` keys defaultConfig c
-  , layoutHook = avoidStruts $ myLayoutHook
+  , layoutHook = avoidStruts myLayoutHook
   , manageHook = placeHook myPlacement <+> floatNextHook <+> myManageHook
   , modMask = myModMask
   , startupHook = setWMName "LG3D"
@@ -204,15 +204,15 @@ myWindowKeys = [
   -- ++ myMosaicKeys
   -- ++ myMirrorKeys
 
-myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
+myKeys conf@XConfig {XMonad.modMask = myModMask} = M.fromList $
   myWindowKeys ++ myAudioKeys
 
 -- myTiling = Tall 1 (5/100) (1/2)
 
-mySpacedSplitWithLargeMasterLayout = mySpacing $ myResizable
+mySpacedSplitWithLargeMasterLayout = mySpacing myResizable
 -- myTabbedLayout = myTabs
 
-myMultiColumnLayout = (multiCol [1] 4 0.01 0.5)
+myMultiColumnLayout = multiCol [1] 4 0.01 0.5
 mySpacedMultiColumnLayout = mySpacing myMultiColumnLayout
 
 toggles = mkToggle(MIRROR ?? FULL ?? NOBORDERS ?? SMARTBORDERS ?? EOT)
