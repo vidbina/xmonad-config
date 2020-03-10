@@ -162,7 +162,8 @@ mouseResizableTallKeys = [
   ]
 
 workspaceKeys = [
-    ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
+   ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
+ , ((myModMask, xK_w), selectWorkspace def)
  ]
 
 floatKeys = [
