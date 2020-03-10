@@ -43,7 +43,7 @@ myXmobarPP = def { ppCurrent = xmobarColor "black"  myFocussedBorderColor .
 myPlacement = withGaps (16,0,16,0) (smart (0.5,0.5))
 
 main = do
-  xmobarPipe <- spawnPipe xmobarCommand
+  xmobarPipe <- spawnPipe myXmobarCommand
   xmonad $ myConfig xmobarPipe
 
 myConfig p = docks def
@@ -56,25 +56,25 @@ myConfig p = docks def
   , manageHook = placeHook myPlacement <+> floatNextHook <+> myManageHook
   , modMask = myModMask
   , startupHook = setWMName "LG3D"
-  , terminal = terminalCommand
+  , terminal = myTerminalCommand
   , logHook = dynamicLogWithPP myXmobarPP
     { ppOutput = hPutStrLn p } >> updatePointer (0.9, 0.9) (0, 0)
   }
 
 -- tools
-xmobarCommand = "TZDIR=/etc/zoneinfo xmobar -x0"
-dzenCommand = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
-conkyCommand = "conky -c /home/vid/.config/conky/conky.conf"
-terminalCommand = "urxvtc"
+myXmobarCommand = "TZDIR=/etc/zoneinfo xmobar -x0"
+myDzenCommand = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
+myConkyCommand = "conky -c /home/vid/.config/conky/conky.conf"
+myTerminalCommand = "urxvtc"
 
 -- features
 myBorderWidth = 3
-spacingSize = 5
-mySpacing = spacing spacingSize
+mySpacingSize = 5
+mySpacing = spacing mySpacingSize
 myResizable = mouseResizableTile { nmaster = 1, masterFrac = 2/3, fracIncrement = 2/100, draggerType = BordersDragger }
 
-centeredHalfWidthRect = W.RationalRect 0.25 0.25 0.5 0.5
-doDialogFloat = doRectFloat centeredHalfWidthRect
+myCenteredHalfWidthRect = W.RationalRect 0.25 0.25 0.5 0.5
+doDialogFloat = doRectFloat myCenteredHalfWidthRect
 doToolbarFloat = doRectFloat $ W.RationalRect 0.025 0.1 0.1 0.5
 
 myManageHook = composeAll
@@ -114,7 +114,7 @@ myManageHook = composeAll
 -- bindings
 myModMask = mod4Mask
 
-audioKeys =
+myAudioKeys =
   [ ((0, 0x1008ff12), spawn "amixer -q sset Master toggle")
   , ((0, 0x1008ff11), spawn "amixer -q sset Master 10%-")
   , ((0, 0x1008ff13), spawn "amixer -q sset Master 10%+")
@@ -123,24 +123,24 @@ audioKeys =
   , ((0, 0x1008ff17), spawn "playerctl next") -- next
   ]
 
-mirrorKeys = [
+myMirrorKeys = [
     ((myModMask, xK_a), sendMessage MirrorShrink)
   , ((myModMask .|. shiftMask, xK_a), sendMessage MirrorExpand)
   ]
 
-triggerKeys = [
+myTriggerKeys = [
     ((myModMask, xK_Escape), spawn "sleep 0.2; xtrlock-pam -b none")
   , ((myModMask .|. shiftMask, xK_Escape), spawn "sleep 0.2; xlock")
   , ((0, xK_Print), spawn "sleep 0.2; scrot -d 0.1")
   , ((myModMask, xK_Print), spawn "sleep 0.2; scrot -s")
   ]
 
-spacingKeys = [
+mySpacingKeys = [
     ((myModMask, xK_z), setSpacing 0)
-  , ((myModMask .|. shiftMask, xK_z), setSpacing spacingSize)
+  , ((myModMask .|. shiftMask, xK_z), setSpacing mySpacingSize)
   ]
 
-toggleKeys = [
+myToggleKeys = [
     ((myModMask, xK_f), sendMessage $ Toggle FULL)
   , ((myModMask, xK_x), sendMessage $ Toggle MIRROR)
   --, ((myModMask, xK_x), sendMessage $ Toggle NOBORDERS)
@@ -148,7 +148,7 @@ toggleKeys = [
   ]
 
 -- Mosaic keybindings
---mosaicKeys =
+--myMosaicKeys =
 --  [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
 --  , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
 ----  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
@@ -156,17 +156,17 @@ toggleKeys = [
 --  ]
 
 -- ResizableTall keybindings
-mouseResizableTallKeys = [
+myMouseResizableTallKeys = [
     ((myModMask, xK_u), sendMessage ShrinkSlave)
   , ((myModMask, xK_i), sendMessage ExpandSlave)
   ]
 
-workspaceKeys = [
+myWorkspaceKeys = [
    ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
  , ((myModMask, xK_w), selectWorkspace def)
  ]
 
-floatKeys = [
+myFloatKeys = [
   -- resize width
     ((myModMask, xK_s), withFocused (keysResizeWindow (-20, 0) (1%2,1%2)))
   , ((myModMask .|. shiftMask, xK_s), withFocused (keysResizeWindow (20,0) (1%2,1%2)))
@@ -190,22 +190,22 @@ floatKeys = [
   ]
 
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
-windowKeys = [
+myWindowKeys = [
     ((myModMask, xK_b), sendMessage ToggleStruts)
   , ((myModMask, xK_r), sendMessage Reset)
   , ((myModMask .|. shiftMask,  xK_r), sendMessage resetAlt)
   ]
-  ++ floatKeys
-  ++ triggerKeys
-  ++ workspaceKeys
-  ++ spacingKeys
-  ++ toggleKeys
-  ++ mouseResizableTallKeys
-  -- ++ mosaicKeys
-  -- ++ mirrorKeys
+  ++ myFloatKeys
+  ++ myTriggerKeys
+  ++ myWorkspaceKeys
+  ++ mySpacingKeys
+  ++ myToggleKeys
+  ++ myMouseResizableTallKeys
+  -- ++ myMosaicKeys
+  -- ++ myMirrorKeys
 
 myKeys conf@(XConfig {XMonad.modMask = myModMask}) = M.fromList $
-  windowKeys ++ audioKeys
+  myWindowKeys ++ myAudioKeys
 
 -- myTiling = Tall 1 (5/100) (1/2)
 
