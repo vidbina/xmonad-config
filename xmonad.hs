@@ -4,6 +4,7 @@ import XMonad.Actions.DynamicWorkspaces
 import XMonad.Actions.FloatKeys
 import XMonad.Actions.UpdatePointer
 import XMonad.Config.Desktop
+import XMonad.Hooks.DynamicBars
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.FloatNext
 import XMonad.Hooks.ManageDocks
@@ -42,6 +43,15 @@ myXmobarPP = def { ppCurrent = xmobarColor "black"  myFocussedBorderColor .
 
 myPlacement = withGaps (16,0,16,0) (smart (0.5,0.5))
 
+-- Sourced from https://github.com/jonascj/.xmonad/blob/master/xmonad.hs
+barCreator :: DynamicStatusBar
+barCreator (S sid) = do
+  spawnPipe $ myXmobarCommand ++ " --screen " ++ show sid
+
+barDestroyer :: DynamicStatusBarCleanup
+barDestroyer = do
+  return ()
+
 main = do
   xmobarPipe <- spawnPipe myXmobarCommand
   xmonad $ myConfig xmobarPipe
@@ -55,14 +65,17 @@ myConfig p = docks def
   , layoutHook = avoidStruts myLayoutHook
   , manageHook = placeHook myPlacement <+> floatNextHook <+> myManageHook
   , modMask = myModMask
-  , startupHook = setWMName "LG3D"
+  , handleEventHook =
+      dynStatusBarEventHook barCreator barDestroyer
+  , startupHook = do
+      setWMName "LG3D"
+      dynStatusBarStartup barCreator barDestroyer
   , terminal = myTerminalCommand
-  , logHook = dynamicLogWithPP myXmobarPP
-    { ppOutput = hPutStrLn p } >> updatePointer (0.9, 0.9) (0, 0)
+  , logHook = multiPP (myXmobarPP) (myXmobarPP)
   }
 
 -- tools
-myXmobarCommand = "TZDIR=/etc/zoneinfo xmobar -x0"
+myXmobarCommand = "TZDIR=/etc/zoneinfo xmobar -x0 "
 myDzenCommand = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 myConkyCommand = "conky -c /home/vid/.config/conky/conky.conf"
 myTerminalCommand = "urxvtc"
