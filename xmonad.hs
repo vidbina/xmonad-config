@@ -71,7 +71,7 @@ myConfig p = docks def
       setWMName "LG3D"
       dynStatusBarStartup barCreator barDestroyer
   , terminal = myTerminalCommand
-  , logHook = multiPP (myXmobarPP) (myXmobarPP)
+  , logHook = multiPP (myXmobarPP) (myXmobarPP) >> updatePointer (0.9, 0.9) (0, 0)
   }
 
 -- tools
