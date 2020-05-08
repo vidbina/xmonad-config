@@ -45,12 +45,10 @@ myPlacement = withGaps (16,0,16,0) (smart (0.5,0.5))
 
 -- Sourced from https://github.com/jonascj/.xmonad/blob/master/xmonad.hs
 barCreator :: DynamicStatusBar
-barCreator (S sid) = do
-  spawnPipe $ myXmobarCommand ++ " --screen " ++ show sid
+barCreator (S sid) = spawnPipe $ myXmobarCommand ++ " --screen " ++ show sid
 
 barDestroyer :: DynamicStatusBarCleanup
-barDestroyer = do
-  return ()
+barDestroyer = return ()
 
 main = do
   xmobarPipe <- spawnPipe myXmobarCommand
@@ -71,7 +69,7 @@ myConfig p = docks def
       setWMName "LG3D"
       dynStatusBarStartup barCreator barDestroyer
   , terminal = myTerminalCommand
-  , logHook = multiPP (myXmobarPP) (myXmobarPP) >> updatePointer (0.9, 0.9) (0, 0)
+  , logHook = multiPP myXmobarPP myXmobarPP >> updatePointer (0.9, 0.9) (0, 0)
   }
 
 -- tools
