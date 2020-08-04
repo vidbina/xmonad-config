@@ -31,6 +31,9 @@ myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
 
 myNormalBorderColor = "#1B1D1E"
 
+nextTag :: (String -> String)
+nextTag string = xmobarColor "red" "" (id string)
+
 myXmobarPP :: PP
 myXmobarPP =
   def
@@ -39,7 +42,7 @@ myXmobarPP =
         xmobarColor myFocussedBorderColor myNormalBorderColor . wrap "(" ")"
     , ppUrgent = xmobarColor "red" ""
     , ppTitle = xmobarColor "green" ""
-    , ppExtras = [willFloatNextPP id]
+    , ppExtras = [willFloatNextPP nextTag]
     }
 
 myPlacement = withGaps (16, 0, 16, 0) (smart (0.5, 0.5))
