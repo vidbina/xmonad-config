@@ -141,6 +141,7 @@ myManageHook =
     , (className =? "Nm-connection-editor") --> doFloat
     , (className =? "qemu-system-i386") --> doDialogFloat
     , (className =? "Eog") --> doDialogFloat
+    , (className =? "Xmessage") --> doDialogFloat
     , (className =? "feh") --> doFloat
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
     , (className =? "ibus-setup") --> doDialogFloat
