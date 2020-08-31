@@ -143,6 +143,7 @@ myManageHook =
     , (className =? "Eog") --> doDialogFloat
     , (className =? "Xmessage") --> doDialogFloat
     , (className =? "feh") --> doFloat
+    , (className =? "Octave") --> doFloat
     , (className =? "scribus") --> doFloat
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
     , (className =? "ibus-setup") --> doDialogFloat
