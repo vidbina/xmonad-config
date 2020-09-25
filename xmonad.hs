@@ -196,12 +196,13 @@ myToggleKeys =
   ]
 
 -- Mosaic keybindings
---myMosaicKeys =
---  [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
---  , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
-----  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
-----  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
---  ]
+myMosaicKeys =
+  [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
+  , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
+--  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
+--  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
+  ]
+
 -- ResizableTall keybindings
 myMouseResizableTallKeys =
   [ ((myModMask, xK_u), sendMessage ShrinkSlave)
