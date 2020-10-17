@@ -133,6 +133,8 @@ myManageHook =
     , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
     , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
     , (className =? "Dialog") --> doDialogFloat
+    , (className =? "zoom") --> doDialogFloat
+    , (stringProperty "WM_NAME" =? "zoom_linux_float_video_window") --> doDialogFloat
   -- https://github.com/xmonad/xmonad/issues/146
   -- import Data.List
   --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
