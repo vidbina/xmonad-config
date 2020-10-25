@@ -148,6 +148,7 @@ myManageHook =
     , (className =? "Octave") --> doFloat
     , (className =? "Gnuplot") --> doFloat
     , (className =? "scribus") --> doFloat
+    , (className =? "Gucharmap") --> doFloat
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
     , (className =? "ibus-setup") --> doDialogFloat
     , (stringProperty "WM_NAME" =? "Cinelerra-CV: Errors") --> doFloat
