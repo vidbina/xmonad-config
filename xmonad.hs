@@ -130,6 +130,7 @@ myManageHook =
     , (stringProperty "WM_WINDOW_ROLE" =? "AlarmWindow" <&&> className =?
        "Daily") -->
       doDialogFloat
+    , (className =? "Daily") --> doDialogFloat
     , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
     , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
     , (className =? "Dialog") --> doDialogFloat
