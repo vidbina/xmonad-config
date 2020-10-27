@@ -32,7 +32,7 @@ myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
 myNormalBorderColor = "#1B1D1E"
 
 nextTag :: (String -> String)
-nextTag string = xmobarColor "red" "" string
+nextTag = xmobarColor "red" ""
 
 myXmobarPP :: PP
 myXmobarPP =
