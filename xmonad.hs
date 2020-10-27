@@ -80,11 +80,8 @@ myConfig p =
 
 -- tools
 myXmobarCommand = "TZDIR=/etc/zoneinfo xmobar -x0 "
-
-myDzenCommand = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
-
-myConkyCommand = "conky -c /home/vid/.config/conky/conky.conf"
-
+--myDzenCommand = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
+--myConkyCommand = "conky -c /home/vid/.config/conky/conky.conf"
 myTerminalCommand = "kitty"
 
 -- features
