@@ -242,6 +242,9 @@ myFloatKeys
     , withFocused (keysMoveWindow (0, -100)))
   ]
 
+experimentKeys = [
+  ]
+
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 myWindowKeys =
   [ ((myModMask, xK_b), sendMessage ToggleStruts)
@@ -252,6 +255,7 @@ myWindowKeys =
   myTriggerKeys ++
   myWorkspaceKeys ++ mySpacingKeys ++ myToggleKeys ++ myMouseResizableTallKeys-- ++ myMosaicKeys
   -- ++ myMirrorKeys
+  ++ experimentKeys
 
 myKeys conf@XConfig {XMonad.modMask = myModMask} =
   M.fromList $ myWindowKeys ++ myAudioKeys
