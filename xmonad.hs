@@ -80,6 +80,7 @@ myConfig p =
 
 -- tools
 myXmobarCommand = "TZDIR=/etc/zoneinfo xmobar -x0 "
+
 --myDzenCommand = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 --myConkyCommand = "conky -c /home/vid/.config/conky/conky.conf"
 myTerminalCommand = "kitty"
@@ -132,7 +133,8 @@ myManageHook =
     , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
     , (className =? "Dialog") --> doDialogFloat
     , (className =? "zoom") --> doDialogFloat
-    , (stringProperty "WM_NAME" =? "zoom_linux_float_video_window") --> doDialogFloat
+    , (stringProperty "WM_NAME" =? "zoom_linux_float_video_window") -->
+      doDialogFloat
   -- https://github.com/xmonad/xmonad/issues/146
   -- import Data.List
   --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
@@ -200,10 +202,10 @@ myToggleKeys =
 myMosaicKeys =
   [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
   , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
---  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
---  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
   ]
 
+--  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
+--  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
 -- ResizableTall keybindings
 myMouseResizableTallKeys =
   [ ((myModMask, xK_u), sendMessage ShrinkSlave)
@@ -242,8 +244,7 @@ myFloatKeys
     , withFocused (keysMoveWindow (0, -100)))
   ]
 
-experimentKeys = [
-  ]
+experimentKeys = []
 
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 myWindowKeys =
@@ -253,9 +254,13 @@ myWindowKeys =
   ] ++
   myFloatKeys ++
   myTriggerKeys ++
-  myWorkspaceKeys ++ mySpacingKeys ++ myToggleKeys ++ myMouseResizableTallKeys-- ++ myMosaicKeys
+  myWorkspaceKeys ++
+  mySpacingKeys ++
+  myToggleKeys ++
+  myMouseResizableTallKeys -- ++ myMosaicKeys
   -- ++ myMirrorKeys
-  ++ experimentKeys
+   ++
+  experimentKeys
 
 myKeys conf@XConfig {XMonad.modMask = myModMask} =
   M.fromList $ myWindowKeys ++ myAudioKeys
