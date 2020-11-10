@@ -106,59 +106,65 @@ doDialogFloat = doRectFloat myCenteredHalfWidthRect
 
 doToolbarFloat = doRectFloat $ W.RationalRect 0.025 0.1 0.1 0.5
 
-myManageHook =
+windowRole :: String -> Query Bool
+windowRole s = (stringProperty "WM_WINDOW_ROLE") =? s
+
+windowName :: String -> Query Bool
+windowName s = (stringProperty "WM_NAME") =? s
+
+windowNameAndClass :: String -> String -> Query Bool
+windowNameAndClass n c = (windowName n) <&&> (className =? c)
+
+windowRoleAndClass :: String -> String -> Query Bool
+windowRoleAndClass r c = (windowRole r) <&&> (className =? c)
+
+myManageHookThunderbird =
   composeAll
-    [ className =? "Pinentry" --> doFloat
-    , (stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog") -->
-      doDialogFloat
-    , (stringProperty "WM_WINDOW_ROLE" =? "toolbox_window") --> doToolbarFloat
-    , (stringProperty "WM_WINDOW_ROLE" =? "gimp-message-dialog") -->
-      doDialogFloat
-    , (stringProperty "WM_WINDOW_ROLE" =? "gimp-toolbox-color-dialog") -->
-      doDialogFloat
-    , (stringProperty "WM_WINDOW_ROLE" =? "gimp-layer-new") --> doDialogFloat
-    , (className =? "Gimp") --> doDialogFloat
-  -- Thunderbird
-    , (stringProperty "WM_WINDOW_ROLE" =? "EventDialog" <&&> className =?
-       "Calendar") -->
-      doDialogFloat
-    , (stringProperty "WM_WINDOW_ROLE" =? "EventDialog" <&&> className =?
-       "Daily") -->
-      doDialogFloat
-    , (stringProperty "WM_WINDOW_ROLE" =? "AlarmWindow" <&&> className =?
-       "Daily") -->
-      doDialogFloat
-    , (className =? "Daily") --> doDialogFloat
+    [ (className =? "Daily") --> doDialogFloat
+    , (className =? "Dialog") --> doDialogFloat
     , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
     , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
-    , (className =? "Dialog") --> doDialogFloat
     , (className =? "zoom") --> doDialogFloat
-    , (stringProperty "WM_NAME" =? "zoom_linux_float_video_window") -->
-      doDialogFloat
-  -- https://github.com/xmonad/xmonad/issues/146
-  -- import Data.List
-  --, (className =? "VirtualBox" <&&> fmap ("[Running]" `isInfixOf`) title) -->
-    , (className =? "VirtualBox") --> doDialogFloat
-    , (className =? "processing-app-Base") --> doDialogFloat
-    , (className =? "Nm-connection-editor") --> doFloat
-    , (className =? "qemu-system-i386") --> doDialogFloat
+    , (windowName "zoom_linux_float_video_window") --> doDialogFloat
+    , (windowRoleAndClass "AlarmWindow" "Daily") --> doDialogFloat
+    , (windowRoleAndClass "EventDialog" "Daily") --> doDialogFloat
+    , (windowRoleAndClass "EventDialog" "Calendar") --> doDialogFloat
+    ]
+
+-- https://github.com/xmonad/xmonad/issues/146
+myManageHookVirtualbox =
+  composeAll
+    [ (className =? "VirtualBox") --> doDialogFloat
+    ]
+
+myManageHook =
+  composeAll
+    [ myManageHookThunderbird
+    , myManageHookVirtualbox
+    , (className =? ".blueman-manager-wrapped") --> doDialogFloat
     , (className =? "Eog") --> doDialogFloat
-    , (className =? "ffplay") --> doFloat
+    , (className =? "Gimp") --> doDialogFloat
+    , (className =? "Gnuplot") --> doFloat
+    , (className =? "Gucharmap") --> doFloat
+    , (className =? "Nm-connection-editor") --> doFloat
+    , (className =? "Octave") --> doFloat
+    , (className =? "Pinentry") --> doFloat
     , (className =? "Xmessage") --> doDialogFloat
     , (className =? "feh") --> doFloat
-    , (className =? "Octave") --> doFloat
-    , (className =? "Gnuplot") --> doFloat
-    , (className =? "scribus") --> doFloat
-    , (className =? "Gucharmap") --> doFloat
-    , (className =? ".blueman-manager-wrapped") --> doDialogFloat
+    , (className =? "ffplay") --> doFloat
     , (className =? "ibus-setup") --> doDialogFloat
-    , (stringProperty "WM_NAME" =? "Cinelerra-CV: Errors") --> doFloat
-    , (stringProperty "WM_NAME" =? "Emoji Choice") --> doFloat
-    , (stringProperty "WM_NAME" =? "Media viewer" <&&> className =?
-       "TelegramDesktop") -->
-      doFloat
-    , (stringProperty "WM_NAME" =? "Formula editor" <&&> className =? "FreeCAD") -->
-      doFloat
+    , (className =? "processing-app-Base") --> doDialogFloat
+    , (className =? "qemu-system-i386") --> doDialogFloat
+    , (className =? "scribus") --> doFloat
+    , (windowName "Cinelerra-CV: Errors") --> doFloat
+    , (windowName "Emoji Choice") --> doFloat
+    , (windowNameAndClass "Formula editor" "FreeCAD") --> doFloat
+    , (windowNameAndClass "Media viewer" "TelegramDesktop") --> doFloat
+    , (windowRole "GtkFileChooserDialog") --> doDialogFloat
+    , (windowRole "gimp-layer-new") --> doDialogFloat
+    , (windowRole "gimp-message-dialog") --> doDialogFloat
+    , (windowRole "gimp-toolbox-color-dialog") --> doDialogFloat
+    , (windowRole "toolbox_window") --> doToolbarFloat
     , manageDocks
     ]
 
