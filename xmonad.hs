@@ -143,6 +143,7 @@ myManageHook =
     , (className =? "Nm-connection-editor") --> doFloat
     , (className =? "qemu-system-i386") --> doDialogFloat
     , (className =? "Eog") --> doDialogFloat
+    , (className =? "ffplay") --> doFloat
     , (className =? "Xmessage") --> doDialogFloat
     , (className =? "feh") --> doFloat
     , (className =? "Octave") --> doFloat
