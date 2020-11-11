@@ -153,6 +153,7 @@ myManageHook =
     , (className =? "feh") --> doFloat
     , (className =? "ffplay") --> doFloat
     , (className =? "ibus-setup") --> doDialogFloat
+    , (className =? "mpv") --> doFloat
     , (className =? "processing-app-Base") --> doDialogFloat
     , (className =? "qemu-system-i386") --> doDialogFloat
     , (className =? "scribus") --> doFloat
