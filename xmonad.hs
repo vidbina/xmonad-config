@@ -252,7 +252,11 @@ myFloatKeys
     , withFocused (keysMoveWindow (0, -100)))
   ]
 
-experimentKeys = []
+experimentKeys =
+  [
+    ((myModMask,               xK_p), spawn "dmenu_run -l 10 -sf green -sb black")
+  , ((myModMask .|. shiftMask, xK_p), spawn "bash -ci 'gmrun'")
+  ]
 
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 myWindowKeys =
