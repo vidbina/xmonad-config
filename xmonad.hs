@@ -133,9 +133,7 @@ myManageHookThunderbird =
 
 -- https://github.com/xmonad/xmonad/issues/146
 myManageHookVirtualbox =
-  composeAll
-    [ (className =? "VirtualBox") --> doDialogFloat
-    ]
+  composeAll [(className =? "VirtualBox") --> doDialogFloat]
 
 myManageHook =
   composeAll
@@ -253,8 +251,7 @@ myFloatKeys
   ]
 
 experimentKeys =
-  [
-    ((myModMask,               xK_p), spawn "dmenu_run -l 10 -sf green -sb black")
+  [ ((myModMask, xK_p), spawn "dmenu_run -l 10 -sf green -sb black")
   , ((myModMask .|. shiftMask, xK_p), spawn "bash -ci 'gmrun'")
   ]
 
