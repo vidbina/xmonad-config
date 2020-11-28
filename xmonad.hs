@@ -26,6 +26,7 @@ import           XMonad.Layout.Spiral
 import           XMonad.Layout.Tabbed
 import           XMonad.StackSet                     as W
 import           XMonad.Util.Run
+import           XMonad.Util.Scratchpad
 
 myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
 
@@ -135,10 +136,20 @@ myManageHookThunderbird =
 myManageHookVirtualbox =
   composeAll [(className =? "VirtualBox") --> doDialogFloat]
 
+-- https://pbrisbin.com/posts/xmonad_scratchpad/#cb3-2
+manageScratchpad :: ManageHook
+manageScratchpad = scratchpadManageHook (W.RationalRect l t w h)
+  where
+    h = 0.1 -- terminal height, 10%
+    w = 1 -- terminal width, 100%
+    t = 1 - h -- distance from top edge, 90%
+    l = 1 - w -- distance from left edge, 0%
+
 myManageHook =
   composeAll
     [ myManageHookThunderbird
     , myManageHookVirtualbox
+    , manageScratchpad
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
     , (className =? "Eog") --> doDialogFloat
     , (className =? "Gimp") --> doDialogFloat
@@ -255,6 +266,14 @@ experimentKeys =
   , ((myModMask .|. shiftMask, xK_p), spawn "bash -ci 'gmrun'")
   ]
 
+scratchpadKeys =
+  [ ((myModMask, xK_u), urxvtScratchpad)
+  , ((myModMask, xK_k), kittyScratchpad)
+  ]
+  where
+    urxvtScratchpad = scratchpadSpawnActionTerminal "urxvt"
+    kittyScratchpad = scratchpadSpawnActionTerminal "kitty"
+
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 myWindowKeys =
   [ ((myModMask, xK_b), sendMessage ToggleStruts)
@@ -269,7 +288,7 @@ myWindowKeys =
   myMouseResizableTallKeys -- ++ myMosaicKeys
   -- ++ myMirrorKeys
    ++
-  experimentKeys
+  experimentKeys ++ scratchpadKeys
 
 myKeys conf@XConfig {XMonad.modMask = myModMask} =
   M.fromList $ myWindowKeys ++ myAudioKeys
