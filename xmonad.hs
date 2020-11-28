@@ -1,31 +1,31 @@
-import qualified Data.Map as M
-import Data.Ratio ((%))
-import XMonad
-import XMonad.Actions.DynamicWorkspaces
-import XMonad.Actions.FloatKeys
-import XMonad.Actions.UpdatePointer
-import XMonad.Config.Desktop
-import XMonad.Hooks.DynamicBars
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.FloatNext
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.Place
-import XMonad.Hooks.SetWMName
-import XMonad.Layout.Cross
-import XMonad.Layout.Gaps
-import XMonad.Layout.Mosaic
-import XMonad.Layout.MosaicAlt
-import XMonad.Layout.MouseResizableTile
-import XMonad.Layout.MultiColumns
-import XMonad.Layout.MultiToggle
-import XMonad.Layout.MultiToggle.Instances
-import XMonad.Layout.ResizableTile
-import XMonad.Layout.Spacing
-import XMonad.Layout.Spiral
-import XMonad.Layout.Tabbed
-import XMonad.StackSet as W
-import XMonad.Util.Run
+import qualified Data.Map                            as M
+import           Data.Ratio                          ((%))
+import           XMonad
+import           XMonad.Actions.DynamicWorkspaces
+import           XMonad.Actions.FloatKeys
+import           XMonad.Actions.UpdatePointer
+import           XMonad.Config.Desktop
+import           XMonad.Hooks.DynamicBars
+import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.FloatNext
+import           XMonad.Hooks.ManageDocks
+import           XMonad.Hooks.ManageHelpers
+import           XMonad.Hooks.Place
+import           XMonad.Hooks.SetWMName
+import           XMonad.Layout.Cross
+import           XMonad.Layout.Gaps
+import           XMonad.Layout.Mosaic
+import           XMonad.Layout.MosaicAlt
+import           XMonad.Layout.MouseResizableTile
+import           XMonad.Layout.MultiColumns
+import           XMonad.Layout.MultiToggle
+import           XMonad.Layout.MultiToggle.Instances
+import           XMonad.Layout.ResizableTile
+import           XMonad.Layout.Spacing
+import           XMonad.Layout.Spiral
+import           XMonad.Layout.Tabbed
+import           XMonad.StackSet                     as W
+import           XMonad.Util.Run
 
 myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
 
