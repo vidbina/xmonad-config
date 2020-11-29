@@ -267,12 +267,12 @@ experimentKeys =
   ]
 
 scratchpadKeys =
-  [ ((myModMask, xK_u), urxvtScratchpad)
-  , ((myModMask, xK_k), kittyScratchpad)
+  [ ((myModMask .|. shiftMask, xK_0), urxvtScratchpad)
+  , ((myModMask, xK_0), kittyScratchpad)
   ]
   where
     urxvtScratchpad = scratchpadSpawnActionTerminal "urxvt"
-    kittyScratchpad = scratchpadSpawnActionTerminal "kitty"
+    kittyScratchpad = scratchpadSpawnActionCustom "kitty --name=scratchpad"
 
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 myWindowKeys =
