@@ -136,6 +136,19 @@ myManageHookThunderbird =
 myManageHookVirtualbox =
   composeAll [(className =? "VirtualBox") --> doDialogFloat]
 
+-- https://wiki.haskell.org/Xmonad/General_xmonad.hs_config_tips#Tiling_most_windows_in_Gimp
+manageGimp :: ManageHook
+manageGimp =
+  composeAll
+    [ (windowRole "gimp-toolbox" <||> windowRole "gimp-image-window") -->
+      (ask >>= doF . W.sink)
+    , (className =? "Gimp") --> doDialogFloat
+    , (windowRole "gimp-layer-new") --> doDialogFloat
+    , (windowRole "gimp-message-dialog") --> doDialogFloat
+    , (windowRole "gimp-toolbox-color-dialog") --> doDialogFloat
+    --, (windowRole "toolbox_window") --> doToolbarFloat
+    ]
+
 -- https://pbrisbin.com/posts/xmonad_scratchpad/#cb3-2
 manageScratchpad :: ManageHook
 manageScratchpad = scratchpadManageHook (W.RationalRect l t w h)
@@ -150,9 +163,9 @@ myManageHook =
     [ myManageHookThunderbird
     , myManageHookVirtualbox
     , manageScratchpad
+    , manageGimp
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
     , (className =? "Eog") --> doDialogFloat
-    , (className =? "Gimp") --> doDialogFloat
     , (className =? "Gnuplot") --> doFloat
     , (className =? "Gucharmap") --> doFloat
     , (className =? "Nm-connection-editor") --> doFloat
@@ -171,10 +184,6 @@ myManageHook =
     , (windowNameAndClass "Formula editor" "FreeCAD") --> doFloat
     , (windowNameAndClass "Media viewer" "TelegramDesktop") --> doFloat
     , (windowRole "GtkFileChooserDialog") --> doDialogFloat
-    , (windowRole "gimp-layer-new") --> doDialogFloat
-    , (windowRole "gimp-message-dialog") --> doDialogFloat
-    , (windowRole "gimp-toolbox-color-dialog") --> doDialogFloat
-    , (windowRole "toolbox_window") --> doToolbarFloat
     , manageDocks
     ]
 
