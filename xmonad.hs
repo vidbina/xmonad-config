@@ -119,6 +119,7 @@ windowNameAndClass n c = (windowName n) <&&> (className =? c)
 windowRoleAndClass :: String -> String -> Query Bool
 windowRoleAndClass r c = (windowRole r) <&&> (className =? c)
 
+myManageHookThunderbird :: ManageHook
 myManageHookThunderbird =
   composeAll
     [ (className =? "Daily") --> doDialogFloat
@@ -133,6 +134,7 @@ myManageHookThunderbird =
     ]
 
 -- https://github.com/xmonad/xmonad/issues/146
+myManageHookVirtualbox :: ManageHook
 myManageHookVirtualbox =
   composeAll [(className =? "VirtualBox") --> doDialogFloat]
 
