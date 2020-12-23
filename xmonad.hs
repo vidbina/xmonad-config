@@ -166,6 +166,7 @@ myManageHook =
     , manageGimp
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
     , (className =? "Eog") --> doDialogFloat
+    , (className =? "Ghidra") --> doFloat
     , (className =? "Gnuplot") --> doFloat
     , (className =? "Godot") --> doFloat
     , (className =? "Gucharmap") --> doFloat
