@@ -188,6 +188,7 @@ myManageHook =
     , (windowNameAndClass "Formula editor" "FreeCAD") --> doFloat
     , (windowNameAndClass "Media viewer" "TelegramDesktop") --> doFloat
     , (windowRole "GtkFileChooserDialog") --> doDialogFloat
+    , (windowRole "PictureInPicture") --> doFloat
     , manageDocks
     ]
 
