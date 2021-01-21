@@ -166,6 +166,7 @@ myManageHook =
     , myManageHookVirtualbox
     , manageScratchpad
     , manageGimp
+    , (className =? ".arandr-wrapped") --> doFloat
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
     , (className =? "Eog") --> doDialogFloat
     , (className =? "Ghidra") --> doFloat
