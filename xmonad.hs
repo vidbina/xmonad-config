@@ -186,6 +186,7 @@ myManageHook =
     , (className =? "scribus") --> doFloat
     , (windowName "Cinelerra-CV: Errors") --> doFloat
     , (windowName "Emoji Choice") --> doFloat
+    , (windowName "Volume Control") --> doFloat
     , (windowNameAndClass "Formula editor" "FreeCAD") --> doFloat
     , (windowNameAndClass "Media viewer" "TelegramDesktop") --> doFloat
     , (windowRole "GtkFileChooserDialog") --> doDialogFloat
