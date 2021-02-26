@@ -298,6 +298,7 @@ myWindowKeys =
   [ ((myModMask, xK_b), sendMessage ToggleStruts)
   , ((myModMask, xK_r), sendMessage Reset)
   , ((myModMask .|. shiftMask, xK_r), sendMessage resetAlt)
+  , ((myModMask .|. shiftMask, xK_slash), withFocused $ \w -> spawn ("xkill -id " ++ show w))
   ] ++
   myFloatKeys ++
   myTriggerKeys ++
