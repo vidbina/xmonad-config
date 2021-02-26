@@ -160,6 +160,9 @@ manageScratchpad = scratchpadManageHook (W.RationalRect l t w h)
     t = 1 - h -- distance from top edge, 90%
     l = 1 - w -- distance from left edge, 0%
 
+bottomRightPlace = fixed (0.9, 0.9)
+bottomRightPlaceHook = placeHook bottomRightPlace
+
 myManageHook =
   composeAll
     [ myManageHookThunderbird
@@ -190,7 +193,7 @@ myManageHook =
     , (windowNameAndClass "Formula editor" "FreeCAD") --> doFloat
     , (windowNameAndClass "Media viewer" "TelegramDesktop") --> doFloat
     , (windowRole "GtkFileChooserDialog") --> doDialogFloat
-    , (windowRole "PictureInPicture") --> doFloat
+    , (windowRole "PictureInPicture") --> bottomRightPlaceHook <+> doFloat
     , manageDocks
     ]
 
