@@ -277,7 +277,7 @@ myFloatKeys
     , withFocused (keysMoveWindow (0, -100)))
   ]
 
-experimentKeys =
+runKeys =
   [ ((myModMask, xK_p), spawn "dmenu_run -l 10 -sf green -sb black")
   , ((myModMask .|. shiftMask, xK_p), spawn "bash -ci 'gmrun'")
   ]
@@ -304,7 +304,7 @@ myWindowKeys =
   myMouseResizableTallKeys -- ++ myMosaicKeys
   -- ++ myMirrorKeys
    ++
-  experimentKeys ++ scratchpadKeys
+  runKeys ++ scratchpadKeys
 
 myKeys conf@XConfig {XMonad.modMask = myModMask} =
   M.fromList $ myWindowKeys ++ myAudioKeys
