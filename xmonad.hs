@@ -84,7 +84,7 @@ myXmobarCommand = "TZDIR=/etc/zoneinfo xmobar -x0 "
 
 --myDzenCommand = "dzen2 -y '0' -h '24' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
 --myConkyCommand = "conky -c /home/vid/.config/conky/conky.conf"
-myTerminalCommand = "kitty"
+myTerminalCommand = "urxvt"
 
 -- features
 myBorderWidth = 3
@@ -286,8 +286,8 @@ runKeys =
   ]
 
 scratchpadKeys =
-  [ ((myModMask .|. shiftMask, xK_0), urxvtScratchpad)
-  , ((myModMask, xK_0), kittyScratchpad)
+  [
+      ((myModMask, xK_0), urxvtScratchpad)
   ]
   where
     urxvtScratchpad = scratchpadSpawnActionTerminal "urxvt"
