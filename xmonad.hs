@@ -281,8 +281,11 @@ myFloatKeys
   ]
 
 runKeys =
-  [ ((myModMask, xK_p), spawn "dmenu_run -l 10 -sf green -sb black")
-  , ((myModMask .|. shiftMask, xK_p), spawn "bash -ci 'gmrun'")
+  [
+    ((myModMask, xK_p), spawn "dmenu_run -l 10 -sf green -sb black")
+  , ((myModMask, xK_a), spawn "rofi -show emoji")
+  , ((myModMask, xK_c), spawn "rofi -show calc")
+  , ((myModMask .|. shiftMask, xK_p), spawn "rofi -show run")
   ]
 
 scratchpadKeys =
