@@ -152,8 +152,8 @@ manageGimp =
     ]
 
 -- https://pbrisbin.com/posts/xmonad_scratchpad/#cb3-2
-manageScratchpad :: ManageHook
-manageScratchpad = scratchpadManageHook (W.RationalRect l t w h)
+myManageHookScratchpad :: ManageHook
+myManageHookScratchpad = scratchpadManageHook (W.RationalRect l t w h)
   where
     h = 0.1 -- terminal height, 10%
     w = 1 -- terminal width, 100%
@@ -167,7 +167,7 @@ myManageHook =
   composeAll
     [ myManageHookThunderbird
     , myManageHookVirtualbox
-    , manageScratchpad
+    , scratchpadManageHookDefault --myManageHookScratchpad
     , manageGimp
     , (className =? ".arandr-wrapped") --> doFloat
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
