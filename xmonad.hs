@@ -155,10 +155,10 @@ manageGimp =
 myManageHookScratchpad :: ManageHook
 myManageHookScratchpad = scratchpadManageHook (W.RationalRect l t w h)
   where
-    h = 0.1 -- terminal height, 10%
-    w = 1 -- terminal width, 100%
-    t = 1 - h -- distance from top edge, 90%
-    l = 1 - w -- distance from left edge, 0%
+    h = 0.3 -- terminal height, 10%
+    w = 0.4 -- terminal width, 100%
+    t = 0.4 -- distance from top edge, 90%
+    l = 0.2 -- distance from left edge, 0%
 
 bottomRightPlace = fixed (0.9, 0.9)
 bottomRightPlaceHook = placeHook bottomRightPlace
