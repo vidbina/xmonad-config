@@ -1,8 +1,8 @@
 {
   description = "XMonad Flake";
   outputs = { self }: {
-    nixosModule = { config, ... }: {
-      home-manager.users.vidbina.xsession.windowManager.xmonad = {
+    nixosModule = { config, ... }: username: {
+      home-manager.users."${username}".xsession.windowManager.xmonad = {
         enable = true;
         config = ./xmonad.hs;
       };
