@@ -291,7 +291,7 @@ runKeys =
 
 scratchpadKeys =
   [
-      ((myModMask, xK_0), kittyScratchpad)
+      ((myModMask, xK_0), urxvtScratchpad)
   ]
   where
     termiteScratchpad = scratchpadSpawnActionTerminal "termite -t scratch"
