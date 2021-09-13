@@ -252,12 +252,10 @@ myFloatKeys
   -- resize width
  =
   [ ((myModMask, xK_s), withFocused (keysResizeWindow (-20, 0) (1 % 2, 1 % 2)))
-  , ( (myModMask .|. shiftMask, xK_s)
-    , withFocused (keysResizeWindow (20, 0) (1 % 2, 1 % 2)))
+  , ((myModMask .|. shiftMask, xK_s), withFocused (keysResizeWindow (20, 0) (1 % 2, 1 % 2)))
   -- resize height
   , ((myModMask, xK_d), withFocused (keysResizeWindow (0, -20) (1 % 2, 1 % 2)))
-  , ( (myModMask .|. shiftMask, xK_d)
-    , withFocused (keysResizeWindow (0, 40) (1 % 2, 1 % 2)))
+  , ((myModMask .|. shiftMask, xK_d), withFocused (keysResizeWindow (0, 40) (1 % 2, 1 % 2)))
   , ((myModMask .|. shiftMask, xK_e), toggleFloatNext >> runLogHook)
   -- window move
   , ((myModMask .|. mod1Mask, xK_h), withFocused (keysMoveWindow (-10, 0)))
@@ -265,14 +263,10 @@ myFloatKeys
   , ((myModMask .|. mod1Mask, xK_j), withFocused (keysMoveWindow (0, 10)))
   , ((myModMask .|. mod1Mask, xK_k), withFocused (keysMoveWindow (0, -10)))
   -- fast window move
-  , ( (myModMask .|. mod1Mask .|. controlMask, xK_h)
-    , withFocused (keysMoveWindow (-100, 0)))
-  , ( (myModMask .|. mod1Mask .|. controlMask, xK_l)
-    , withFocused (keysMoveWindow (100, 0)))
-  , ( (myModMask .|. mod1Mask .|. controlMask, xK_j)
-    , withFocused (keysMoveWindow (0, 100)))
-  , ( (myModMask .|. mod1Mask .|. controlMask, xK_k)
-    , withFocused (keysMoveWindow (0, -100)))
+  , ((myModMask .|. mod1Mask .|. controlMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
+  , ((myModMask .|. mod1Mask .|. controlMask, xK_l), withFocused (keysMoveWindow (100, 0)))
+  , ((myModMask .|. mod1Mask .|. controlMask, xK_j), withFocused (keysMoveWindow (0, 100)))
+  , ((myModMask .|. mod1Mask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
   ]
 
 runKeys =
