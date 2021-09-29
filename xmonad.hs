@@ -122,15 +122,15 @@ windowRoleAndClass r c = (windowRole r) <&&> (className =? c)
 myManageHookThunderbird :: ManageHook
 myManageHookThunderbird =
   composeAll
-    [ (className =? "Daily") --> doDialogFloat
-    , (className =? "Dialog") --> doDialogFloat
-    , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
-    , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
-    , (className =? "zoom") --> doDialogFloat
-    , (windowName "zoom_linux_float_video_window") --> doDialogFloat
-    , (windowRoleAndClass "AlarmWindow" "Daily") --> doDialogFloat
-    , (windowRoleAndClass "EventDialog" "Daily") --> doDialogFloat
-    , (windowRoleAndClass "EventDialog" "Calendar") --> doDialogFloat
+    [ windowRoleAndClass "AlarmWindow" "Thunderbird" --> doDialogFloat
+    , windowRoleAndClass "Conflicts" "Thunderbird" --> doDialogFloat
+--  , (className =? "Daily") --> doDialogFloat
+--  , (className =? "Dialog") --> doDialogFloat
+--  , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
+--  , (className =? "Firefox" <&&> title =? "Save As") --> doDialogFloat
+--  , windowRoleAndClass "AlarmWindow" "Daily" --> doDialogFloat
+--  , windowRoleAndClass "EventDialog" "Daily" --> doDialogFloat
+--  , windowRoleAndClass "EventDialog" "Calendar" --> doDialogFloat
     ]
 
 -- https://github.com/xmonad/xmonad/issues/146
@@ -177,18 +177,20 @@ myManageHook =
     , (className =? "Xmessage") --> doDialogFloat
     , (className =? "feh") --> doFloat
     , (className =? "ffplay") --> doFloat
+    , (className =? "gnuplot_qt") --> doFloat
     , (className =? "ibus-setup") --> doDialogFloat
     , (className =? "mpv") --> doFloat
     , (className =? "processing-app-Base") --> doDialogFloat
     , (className =? "qemu-system-i386") --> doDialogFloat
     , (className =? "scribus") --> doFloat
-    , (windowName "Cinelerra-CV: Errors") --> doFloat
-    , (windowName "Emoji Choice") --> doFloat
-    , (windowName "Volume Control") --> doFloat
-    , (windowNameAndClass "Formula editor" "FreeCAD") --> doFloat
-    , (windowNameAndClass "Media viewer" "TelegramDesktop") --> doFloat
-    , (windowRole "GtkFileChooserDialog") --> doDialogFloat
-    , (windowRole "PictureInPicture") --> bottomRightPlaceHook <+> doFloat
+    , windowName "Cinelerra-CV: Errors" --> doFloat
+    , windowName "Emoji Choice" --> doFloat
+    , windowName "Volume Control" --> doFloat
+    , windowName "zoom_linux_float_video_window" --> doFloat
+    , windowNameAndClass "Formula editor" "FreeCAD" --> doFloat
+    , windowNameAndClass "Media viewer" "TelegramDesktop" --> doFloat
+    , windowRole "GtkFileChooserDialog" --> doDialogFloat
+    , windowRole "PictureInPicture" --> bottomRightPlaceHook <+> doFloat
     , manageDocks
     ]
 
