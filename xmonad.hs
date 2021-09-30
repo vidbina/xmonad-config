@@ -124,6 +124,7 @@ myManageHookThunderbird =
   composeAll
     [ windowRoleAndClass "AlarmWindow" "Thunderbird" --> doDialogFloat
     , windowRoleAndClass "Conflicts" "Thunderbird" --> doDialogFloat
+    , windowName "Open Firefox in Troubleshoot Mode?" --> doFloat
 --  , (className =? "Daily") --> doDialogFloat
 --  , (className =? "Dialog") --> doDialogFloat
 --  , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
