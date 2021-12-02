@@ -154,7 +154,9 @@ manageGimp =
 
 -- https://pbrisbin.com/posts/xmonad_scratchpad/#cb3-2
 myManageHookScratchpad :: ManageHook
-myManageHookScratchpad = placeHook simpleSmart
+myManageHookScratchpad =
+  composeAll
+    [ windowName "scratchpad" --> doFloat ]
 
 bottomRightPlace = fixed (0.9, 0.9)
 bottomRightPlaceHook = placeHook bottomRightPlace
