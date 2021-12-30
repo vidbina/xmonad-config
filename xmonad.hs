@@ -68,7 +68,7 @@ myConfig p =
       , focusFollowsMouse = False
       , keys = \c -> myKeys c `M.union` keys defaultConfig c
       , layoutHook = avoidStruts myLayoutHook
-      , manageHook = placeHook myPlacement <+> floatNextHook <+> myManageHook
+      , manageHook = myManageHook <+> placeHook myPlacement <+> floatNextHook
       , modMask = myModMask
       , handleEventHook = dynStatusBarEventHook barCreator barDestroyer
       , startupHook =
@@ -106,6 +106,8 @@ myCenteredHalfWidthRect = W.RationalRect 0.25 0.25 0.5 0.5
 doDialogFloat = doRectFloat myCenteredHalfWidthRect
 
 doToolbarFloat = doRectFloat $ W.RationalRect 0.025 0.1 0.1 0.5
+
+doPageFloat = doRectFloat $ W.RationalRect 0.68 0.15 0.30 0.70
 
 windowRole :: String -> Query Bool
 windowRole s = (stringProperty "WM_WINDOW_ROLE") =? s
@@ -186,6 +188,7 @@ myManageHook =
     , (className =? "processing-app-Base") --> doDialogFloat
     , (className =? "qemu-system-i386") --> doDialogFloat
     , (className =? "scribus") --> doFloat
+    , (className =? "Zathura") --> doPageFloat
     , windowName "Cinelerra-CV: Errors" --> doFloat
     , windowName "Emoji Choice" --> doFloat
     , windowName "Volume Control" --> doFloat
