@@ -137,7 +137,7 @@ myManageHookThunderbird =
     , windowRoleAndClass "Conflicts" "Thunderbird" --> doDialogFloat
     , windowRoleAndClass "Dialog" "Firefox" --> doDialogFloat
     , windowName "Open Firefox in Troubleshoot Mode?" --> doFloat
-    , windowName "Emacs Test" --> doFloat
+    , windowName "Emacs Test" --> (doRectFloat $ myCenteredHalfWidthRect)
 --  , (className =? "Daily") --> doDialogFloat
 --  , (className =? "Dialog") --> doDialogFloat
 --  , (className =? "Firefox" <&&> title =? "File Upload") --> doDialogFloat
