@@ -4,14 +4,16 @@ import           XMonad
 import           XMonad.Actions.DynamicWorkspaces
 import           XMonad.Actions.FloatKeys
 import           XMonad.Actions.UpdatePointer
+import qualified XMonad.Config                       (def)
 import           XMonad.Config.Desktop
-import           XMonad.Hooks.DynamicBars
 import           XMonad.Hooks.DynamicLog
 import           XMonad.Hooks.FloatNext
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Hooks.ManageHelpers
 import           XMonad.Hooks.Place
 import           XMonad.Hooks.SetWMName
+import           XMonad.Hooks.StatusBar
+import           XMonad.Hooks.StatusBar.PP
 import           XMonad.Layout.Cross
 import           XMonad.Layout.Gaps
 import           XMonad.Layout.Mosaic
@@ -28,6 +30,7 @@ import           XMonad.StackSet                     as W
 import           XMonad.Util.Run
 import           XMonad.Util.Scratchpad
 
+-- https://github.com/xmonad/xmonad/blob/11d6711dfff3c97a34809d147785906426419ffc/tutorial.md
 myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
 
 myNormalBorderColor = "#1B1D1E"
@@ -38,45 +41,36 @@ nextTag = xmobarColor "red" ""
 myXmobarPP :: PP
 myXmobarPP =
   def
-    { ppCurrent = xmobarColor "black" myFocussedBorderColor . wrap "[" "]"
-    , ppVisible =
-        xmobarColor myFocussedBorderColor myNormalBorderColor . wrap "(" ")"
+    { ppCurrent = wrap "{" "}"
+    , ppVisible = wrap "" ""
     , ppUrgent = xmobarColor "red" ""
-    , ppTitle = xmobarColor "green" ""
+    , ppTitle = xmobarColor myFocussedBorderColor ""
     , ppExtras = [willFloatNextPP nextTag]
     }
 
 myPlacement = withGaps (16, 0, 16, 0) (smart (0.5, 0.5))
 
--- Sourced from https://github.com/jonascj/.xmonad/blob/master/xmonad.hs
-barCreator :: DynamicStatusBar
-barCreator (S sid) = spawnPipe $ myXmobarCommand ++ " --screen " ++ show sid
+mySB = statusBarProp myXmobarCommand (pure myXmobarPP)
 
-barDestroyer :: DynamicStatusBarCleanup
-barDestroyer = return ()
-
+main :: IO ()
 main = do
-  xmobarPipe <- spawnPipe myXmobarCommand
-  xmonad $ myConfig xmobarPipe
+  xmonad $ withSB mySB myConfig
 
-myConfig p =
+myConfig =
   docks
     def
       { borderWidth = myBorderWidth
       , normalBorderColor = myNormalBorderColor
       , focusedBorderColor = myFocussedBorderColor
       , focusFollowsMouse = False
-      , keys = \c -> myKeys c `M.union` keys defaultConfig c
+      , keys = \c -> myKeys c `M.union` keys def c
       , layoutHook = avoidStruts myLayoutHook
       , manageHook = myManageHook <+> placeHook myPlacement <+> floatNextHook
       , modMask = myModMask
-      , handleEventHook = dynStatusBarEventHook barCreator barDestroyer
       , startupHook =
           do setWMName "LG3D"
-             dynStatusBarStartup barCreator barDestroyer
       , terminal = myTerminalCommand
-      , logHook =
-          multiPP myXmobarPP myXmobarPP >> updatePointer (0.9, 0.9) (0, 0)
+      , logHook = dynamicLogWithPP myXmobarPP
       }
 
 -- tools
@@ -89,9 +83,9 @@ myTerminalCommand = "urxvt"
 -- features
 myBorderWidth = 3
 
-mySpacingSize = 5
+mySpacingSize = toInteger 5
 
-mySpacing = spacing mySpacingSize
+mySpacing = spacing $ fromInteger mySpacingSize
 
 myResizable =
   mouseResizableTile
@@ -228,8 +222,8 @@ myTriggerKeys =
   ]
 
 mySpacingKeys =
-  [ ((myModMask, xK_z), setSpacing 0)
-  , ((myModMask .|. shiftMask, xK_z), setSpacing mySpacingSize)
+  [ ((myModMask, xK_z), setScreenWindowSpacing 0)
+  , ((myModMask .|. shiftMask, xK_z), setScreenWindowSpacing mySpacingSize)
   ]
 
 myToggleKeys =
@@ -300,8 +294,6 @@ scratchpadKeys =
 -- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
 myWindowKeys =
   [ ((myModMask, xK_b), sendMessage ToggleStruts)
-  , ((myModMask, xK_r), sendMessage Reset)
-  , ((myModMask .|. shiftMask, xK_r), sendMessage resetAlt)
   , ((myModMask .|. shiftMask, xK_slash), withFocused $ \w -> spawn ("xkill -id " ++ show w))
   ] ++
   myFloatKeys ++
