@@ -1,6 +1,7 @@
 import qualified Data.Map                            as M
 import           Data.Ratio                          ((%))
 import           XMonad
+import           XMonad.Actions.CycleWS
 import           XMonad.Actions.DynamicWorkspaces
 import           XMonad.Actions.FloatKeys
 import           XMonad.Actions.UpdatePointer
@@ -264,6 +265,10 @@ myMouseResizableTallKeys =
 myWorkspaceKeys =
   [ ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
   , ((myModMask .|. mod1Mask, xK_w), selectWorkspace def)
+  , ((myModMask, xK_Tab), nextWS)
+  , ((myModMask .|. shiftMask, xK_Tab), prevWS)
+  , ((myModMask .|. mod1Mask, xK_Tab), nextScreen)
+  , ((myModMask .|. mod1Mask .|. shiftMask, xK_Tab), prevScreen)
   ]
 
 myFloatKeys
