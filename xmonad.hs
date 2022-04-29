@@ -321,7 +321,7 @@ myKeys conf@XConfig {XMonad.modMask = myModMask} =
 mySpacedSplitWithLargeMasterLayout = mySpacing myResizable
 
 -- myTabbedLayout = myTabs
-myMultiColumnLayout = multiCol [1] 4 0.01 0.5
+myMultiColumnLayout = multiCol [1, 1, 0] 2 0.01 0.4
 
 mySpacedMultiColumnLayout = mySpacing myMultiColumnLayout
 
