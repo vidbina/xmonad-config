@@ -200,6 +200,10 @@ myManageHook =
     , (className =? "qemu-system-i386") --> doDialogFloat
     , (className =? "scribus") --> doFloat
     , (className =? "Zathura") --> doPageFloat
+    , (className =? "okular") --> doPageFloat
+    , windowNameAndClass "Print To File ..." "okular" --> doFloat
+    , windowNameAndClass "Print" "okular" --> doFloat
+    , windowNameAndClass "Select Color" "okular" --> doFloat
     , windowName "Cinelerra-CV: Errors" --> doFloat
     , windowName "Emoji Choice" --> doFloat
     , windowName "Volume Control" --> doFloat
