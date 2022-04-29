@@ -31,21 +31,35 @@ import           XMonad.Util.Run
 import           XMonad.Util.Scratchpad
 
 -- https://github.com/xmonad/xmonad/blob/11d6711dfff3c97a34809d147785906426419ffc/tutorial.md
-myFocussedBorderColor = "#FF1493" -- "#e43a67" -- "#3abce4"
 
+myFocussedBorderColor = "#FF1493" -- "#e43a67" --
 myNormalBorderColor = "#1B1D1E"
 
+mySubduedColor = "#a8a8a8"
+myNormalColor = "#ffffff"
+
+myRedColor = "#e91e63"
+myGreenColor = "#44bc44"
+myYellowColor = "#d0bc00"
+myBlueColor = "#2fafff"
+myMagentaColor = "#feacd0"
+myOrangeColor = "#ff6600"
+
+myTransparentColor = "#00000000"
+
+
 nextTag :: (String -> String)
-nextTag = xmobarColor "red" ""
+nextTag = xmobarColor "black" myYellowColor
 
 myXmobarPP :: PP
 myXmobarPP =
   def
-    { ppCurrent = wrap "{" "}"
-    , ppVisible = wrap "" ""
-    , ppUrgent = xmobarColor "red" ""
-    , ppTitle = xmobarColor myFocussedBorderColor ""
-    , ppExtras = [willFloatNextPP nextTag]
+    { ppCurrent = xmobarColor myMagentaColor "" . wrap "{" "}"
+    , ppVisible = xmobarColor myMagentaColor "" . wrap "" ""
+    , ppHidden = xmobarColor mySubduedColor ""
+    , ppUrgent = xmobarColor myOrangeColor ""
+    , ppTitle = xmobarColor myNormalColor "" . wrap " " " "
+    , ppExtras = [willFloatNextPP $ nextTag . wrap " " " "]
     }
 
 myPlacement = withGaps (16, 0, 16, 0) (smart (0.5, 0.5))
