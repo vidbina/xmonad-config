@@ -298,7 +298,7 @@ myFloatKeys
 
 runKeys =
   [
-    ((myModMask, xK_p), spawn "dmenu_run -sf green -sb black")
+    ((myModMask, xK_p), spawn "dmenu_run -p ':>' -fn 'DejaVuSansMono-20:style=bold' -nf white -nb black -sf black -sb '#FF1493'")
   , ((myModMask, xK_a), spawn "rofi -show emoji")
   , ((myModMask, xK_c), spawn "rofi -show calc")
   --, ((myModMask .|. shiftMask, xK_p), spawn "bash -ci 'gmrun'")
