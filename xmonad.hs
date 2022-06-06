@@ -198,6 +198,7 @@ myManageHook =
     , (className =? "mpv") --> doFloat
     , (className =? "processing-app-Base") --> doDialogFloat
     , (className =? "qemu-system-i386") --> doDialogFloat
+    , (className =? "vokoscreen") --> doFloat
     , (className =? "scribus") --> doFloat
     , (className =? "Zathura") --> doPageFloat
     , (className =? "okular") --> doPageFloat
