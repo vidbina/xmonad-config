@@ -81,7 +81,7 @@ myConfig =
       , keys = \c -> myKeys c `M.union` keys def c
       , layoutHook = avoidStruts myLayoutHook
       , manageHook = myManageHook <+> placeHook myPlacement <+> floatNextHook
-      , modMask = myModMask
+      , modMask = superMask
       , startupHook =
           do setWMName "LG3D"
       , terminal = myTerminalCommand
@@ -226,7 +226,7 @@ myManageHook =
     ]
 
 -- bindings
-myModMask = mod4Mask
+superMask = mod4Mask
 altMask = mod1Mask
 
 myAudioKeys =
@@ -239,96 +239,95 @@ myAudioKeys =
   ]
 
 myMirrorKeys =
-  [ ((myModMask, xK_a), sendMessage MirrorShrink)
-  , ((myModMask .|. shiftMask, xK_a), sendMessage MirrorExpand)
+  [ ((superMask, xK_a), sendMessage MirrorShrink)
+  , ((superMask .|. shiftMask, xK_a), sendMessage MirrorExpand)
   ]
 
 myTriggerKeys =
-  [ ((myModMask, xK_Escape), spawn "sleep 0.2; xtrlock-pam -b none")
-  --, ((myModMask, xK_Insert), spawn "systemctl hibernate")
-  , ((myModMask .|. shiftMask, xK_Escape), spawn "sleep 0.2; xlock")
+  [ ((superMask, xK_Escape), spawn "sleep 0.2; xtrlock-pam -b none")
+  --, ((superMask, xK_Insert), spawn "systemctl hibernate")
+  , ((superMask .|. shiftMask, xK_Escape), spawn "sleep 0.2; xlock")
   , ((0, xK_Print), spawn "sleep 0.2; scrot -d 0.1")
-  , ((myModMask, xK_Print), spawn "sleep 0.2; scrot -s")
+  , ((superMask, xK_Print), spawn "sleep 0.2; scrot -s")
   ]
 
 mySpacingKeys =
-  [ ((myModMask, xK_z), setScreenWindowSpacing 0)
-  , ((myModMask .|. shiftMask, xK_z), setScreenWindowSpacing mySpacingSize)
+  [ ((superMask, xK_z), setScreenWindowSpacing 0)
+  , ((superMask .|. shiftMask, xK_z), setScreenWindowSpacing mySpacingSize)
   ]
 
 myToggleKeys =
-  [ ((myModMask, xK_f), sendMessage $ Toggle FULL)
-  , ((myModMask, xK_x), sendMessage $ Toggle MIRROR)
-  --, ((myModMask, xK_x), sendMessage $ Toggle NOBORDERS)
-  , ((myModMask .|. shiftMask, xK_x), sendMessage $ Toggle SMARTBORDERS)
+  [ ((superMask, xK_f), sendMessage $ Toggle FULL)
+  , ((superMask, xK_x), sendMessage $ Toggle MIRROR)
+  --, ((superMask, xK_x), sendMessage $ Toggle NOBORDERS)
+  , ((superMask .|. shiftMask, xK_x), sendMessage $ Toggle SMARTBORDERS)
   ]
 
 -- Mosaic keybindings
 myMosaicKeys =
-  [ ((myModMask, xK_s), withFocused (sendMessage . tallWindowAlt))
-  , ((myModMask, xK_d), withFocused (sendMessage . wideWindowAlt))
+  [ ((superMask, xK_s), withFocused (sendMessage . tallWindowAlt))
+  , ((superMask, xK_d), withFocused (sendMessage . wideWindowAlt))
   ]
 
---  , ((myModMask, xK_a), withFocused (sendMessage . expandWindowAlt))
---  , ((myModMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
+--  , ((superMask, xK_a), withFocused (sendMessage . expandWindowAlt))
+--  , ((superMask, xK_z), withFocused (sendMessage . shrinkWindowAlt))
 -- ResizableTall keybindings
 myMouseResizableTallKeys =
-  [ ((myModMask, xK_u), sendMessage ShrinkSlave)
-  , ((myModMask, xK_i), sendMessage ExpandSlave)
+  [ ((superMask, xK_u), sendMessage ShrinkSlave)
+  , ((superMask, xK_i), sendMessage ExpandSlave)
   ]
 
 myWorkspaceKeys =
-  [ ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
-  , ((myModMask .|. altMask, xK_w), selectWorkspace def)
-  , ((myModMask, xK_Tab), nextWS)
-  , ((myModMask .|. shiftMask, xK_Tab), prevWS)
-  , ((myModMask .|. altMask, xK_Tab), nextScreen)
-  , ((myModMask .|. altMask .|. shiftMask, xK_Tab), prevScreen)
+  [ ((superMask .|. shiftMask, xK_w), renameWorkspace def)
+  , ((superMask .|. altMask, xK_w), selectWorkspace def)
+  , ((superMask, xK_Tab), nextWS)
+  , ((superMask .|. shiftMask, xK_Tab), prevWS)
+  , ((superMask .|. altMask, xK_Tab), nextScreen)
+  , ((superMask .|. altMask .|. shiftMask, xK_Tab), prevScreen)
   ]
 
 myFloatKeys
   -- resize width
  =
-  [ ((myModMask, xK_s), withFocused (keysResizeWindow (-20, 0) (1 % 2, 1 % 2)))
-  , ((myModMask .|. altMask, xK_s), withFocused (keysResizeWindow (20, 0) (1 % 2, 1 % 2)))
+  [ ((superMask, xK_s), withFocused (keysResizeWindow (-20, 0) (1 % 2, 1 % 2)))
+  , ((superMask .|. altMask, xK_s), withFocused (keysResizeWindow (20, 0) (1 % 2, 1 % 2)))
   -- resize height
-  , ((myModMask, xK_d), withFocused (keysResizeWindow (0, -20) (1 % 2, 1 % 2)))
-  , ((myModMask .|. altMask, xK_d), withFocused (keysResizeWindow (0, 40) (1 % 2, 1 % 2)))
-  , ((myModMask .|. shiftMask, xK_e), toggleFloatNext >> runLogHook)
+  , ((superMask, xK_d), withFocused (keysResizeWindow (0, -20) (1 % 2, 1 % 2)))
+  , ((superMask .|. altMask, xK_d), withFocused (keysResizeWindow (0, 40) (1 % 2, 1 % 2)))
+  , ((superMask .|. shiftMask, xK_e), toggleFloatNext >> runLogHook)
   -- window move
-  , ((myModMask .|. altMask, xK_h), withFocused (keysMoveWindow (-10, 0)))
-  , ((myModMask .|. altMask, xK_l), withFocused (keysMoveWindow (10, 0)))
-  , ((myModMask .|. altMask, xK_j), withFocused (keysMoveWindow (0, 10)))
-  , ((myModMask .|. altMask, xK_k), withFocused (keysMoveWindow (0, -10)))
+  , ((superMask .|. altMask, xK_h), withFocused (keysMoveWindow (-10, 0)))
+  , ((superMask .|. altMask, xK_l), withFocused (keysMoveWindow (10, 0)))
+  , ((superMask .|. altMask, xK_j), withFocused (keysMoveWindow (0, 10)))
+  , ((superMask .|. altMask, xK_k), withFocused (keysMoveWindow (0, -10)))
   -- fast window move
-  , ((myModMask .|. altMask .|. controlMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
-  , ((myModMask .|. altMask .|. controlMask, xK_l), withFocused (keysMoveWindow (100, 0)))
-  , ((myModMask .|. altMask .|. controlMask, xK_j), withFocused (keysMoveWindow (0, 100)))
-  , ((myModMask .|. altMask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
+  , ((superMask .|. altMask .|. controlMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
+  , ((superMask .|. altMask .|. controlMask, xK_l), withFocused (keysMoveWindow (100, 0)))
+  , ((superMask .|. altMask .|. controlMask, xK_j), withFocused (keysMoveWindow (0, 100)))
+  , ((superMask .|. altMask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
   ]
 
 runKeys =
   [
-    ((myModMask, xK_p), spawn "dmenu_run -p ':>' -fn 'DejaVuSansMono-20:style=bold' -nf white -nb black -sf black -sb '#FF1493'")
-  , ((myModMask, xK_a), spawn "rofi -show emoji")
-  , ((myModMask, xK_c), spawn "rofi -show calc")
-  --, ((myModMask .|. shiftMask, xK_p), spawn "bash -ci 'gmrun'")
-  , ((myModMask .|. shiftMask, xK_p), spawn "rofi -show run")
+    ((superMask, xK_p), spawn "dmenu_run -p ':>' -fn 'DejaVuSansMono-20:style=bold' -nf white -nb black -sf black -sb '#FF1493'")
+  , ((superMask, xK_a), spawn "rofi -show emoji")
+  , ((superMask, xK_c), spawn "rofi -show calc")
+  , ((superMask .|. shiftMask, xK_p), spawn "rofi -show run")
   ]
 
 scratchpadKeys =
   [
-      ((myModMask, xK_0), urxvtScratchpad)
+      ((superMask, xK_0), urxvtScratchpad)
   ]
   where
     termiteScratchpad = scratchpadSpawnActionTerminal "termite -t scratch"
     urxvtScratchpad   = scratchpadSpawnActionTerminal "urxvt"
     kittyScratchpad   = scratchpadSpawnActionCustom "kitty --name=scratchpad"
 
--- REMEMBER: myModMask+Shift+(xK_j | xK_k) shifts windows around
+-- REMEMBER: superMask+Shift+(xK_j | xK_k) shifts windows around
 myWindowKeys =
-  [ ((myModMask, xK_b), sendMessage ToggleStruts)
-  , ((myModMask .|. shiftMask, xK_slash), withFocused $ \w -> spawn ("xkill -id " ++ show w))
+  [ ((superMask, xK_b), sendMessage ToggleStruts)
+  , ((superMask .|. shiftMask, xK_slash), withFocused $ \w -> spawn ("xkill -id " ++ show w))
   ] ++
   myFloatKeys ++
   myTriggerKeys ++
@@ -340,7 +339,7 @@ myWindowKeys =
    ++
   runKeys ++ scratchpadKeys
 
-myKeys conf@XConfig {XMonad.modMask = myModMask} =
+myKeys conf@XConfig {XMonad.modMask = superMask} =
   M.fromList $ myWindowKeys ++ myAudioKeys
 
 -- myTiling = Tall 1 (5/100) (1/2)
