@@ -227,6 +227,7 @@ myManageHook =
 
 -- bindings
 myModMask = mod4Mask
+altMask = mod1Mask
 
 myAudioKeys =
   [ ((0, 0x1008ff12), spawn "amixer -q sset Master toggle")
@@ -278,32 +279,32 @@ myMouseResizableTallKeys =
 
 myWorkspaceKeys =
   [ ((myModMask .|. shiftMask, xK_w), renameWorkspace def)
-  , ((myModMask .|. mod1Mask, xK_w), selectWorkspace def)
+  , ((myModMask .|. altMask, xK_w), selectWorkspace def)
   , ((myModMask, xK_Tab), nextWS)
   , ((myModMask .|. shiftMask, xK_Tab), prevWS)
-  , ((myModMask .|. mod1Mask, xK_Tab), nextScreen)
-  , ((myModMask .|. mod1Mask .|. shiftMask, xK_Tab), prevScreen)
+  , ((myModMask .|. altMask, xK_Tab), nextScreen)
+  , ((myModMask .|. altMask .|. shiftMask, xK_Tab), prevScreen)
   ]
 
 myFloatKeys
   -- resize width
  =
   [ ((myModMask, xK_s), withFocused (keysResizeWindow (-20, 0) (1 % 2, 1 % 2)))
-  , ((myModMask .|. mod1Mask, xK_s), withFocused (keysResizeWindow (20, 0) (1 % 2, 1 % 2)))
+  , ((myModMask .|. altMask, xK_s), withFocused (keysResizeWindow (20, 0) (1 % 2, 1 % 2)))
   -- resize height
   , ((myModMask, xK_d), withFocused (keysResizeWindow (0, -20) (1 % 2, 1 % 2)))
-  , ((myModMask .|. mod1Mask, xK_d), withFocused (keysResizeWindow (0, 40) (1 % 2, 1 % 2)))
+  , ((myModMask .|. altMask, xK_d), withFocused (keysResizeWindow (0, 40) (1 % 2, 1 % 2)))
   , ((myModMask .|. shiftMask, xK_e), toggleFloatNext >> runLogHook)
   -- window move
-  , ((myModMask .|. mod1Mask, xK_h), withFocused (keysMoveWindow (-10, 0)))
-  , ((myModMask .|. mod1Mask, xK_l), withFocused (keysMoveWindow (10, 0)))
-  , ((myModMask .|. mod1Mask, xK_j), withFocused (keysMoveWindow (0, 10)))
-  , ((myModMask .|. mod1Mask, xK_k), withFocused (keysMoveWindow (0, -10)))
+  , ((myModMask .|. altMask, xK_h), withFocused (keysMoveWindow (-10, 0)))
+  , ((myModMask .|. altMask, xK_l), withFocused (keysMoveWindow (10, 0)))
+  , ((myModMask .|. altMask, xK_j), withFocused (keysMoveWindow (0, 10)))
+  , ((myModMask .|. altMask, xK_k), withFocused (keysMoveWindow (0, -10)))
   -- fast window move
-  , ((myModMask .|. mod1Mask .|. controlMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
-  , ((myModMask .|. mod1Mask .|. controlMask, xK_l), withFocused (keysMoveWindow (100, 0)))
-  , ((myModMask .|. mod1Mask .|. controlMask, xK_j), withFocused (keysMoveWindow (0, 100)))
-  , ((myModMask .|. mod1Mask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
+  , ((myModMask .|. altMask .|. controlMask, xK_h), withFocused (keysMoveWindow (-100, 0)))
+  , ((myModMask .|. altMask .|. controlMask, xK_l), withFocused (keysMoveWindow (100, 0)))
+  , ((myModMask .|. altMask .|. controlMask, xK_j), withFocused (keysMoveWindow (0, 100)))
+  , ((myModMask .|. altMask .|. controlMask, xK_k), withFocused (keysMoveWindow (0, -100)))
   ]
 
 runKeys =
