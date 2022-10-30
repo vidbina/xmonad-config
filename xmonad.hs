@@ -165,6 +165,14 @@ manageGimp =
     --, (windowRole "toolbox_window") --> doToolbarFloat
     ]
 
+myManageHookCameraTools :: ManageHook
+myManageHookCameraTools =
+  composeAll
+  [ (className =? "guvcview") --> doFloat
+  , (className =? "Guvcview") --> doFloat
+  , (className =? ".guvcview-wrapped") --> doFloat
+  ]
+
 -- https://pbrisbin.com/posts/xmonad_scratchpad/#cb3-2
 myManageHookScratchpad :: ManageHook
 myManageHookScratchpad =
@@ -179,6 +187,7 @@ myManageHook =
     [ myManageHookThunderbird
     , myManageHookVirtualbox
     , myManageHookScratchpad
+    , myManageHookCameraTools
     , manageGimp
     , (className =? ".arandr-wrapped") --> doFloat
     , (className =? ".blueman-manager-wrapped") --> doDialogFloat
