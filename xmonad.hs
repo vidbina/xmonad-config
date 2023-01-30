@@ -1,3 +1,4 @@
+import           Data.List
 import qualified Data.Map                            as M
 import           Data.Ratio                          ((%))
 import           XMonad
@@ -182,6 +183,9 @@ myManageHookScratchpad =
 bottomRightPlace = fixed (0.9, 0.9)
 bottomRightPlaceHook = placeHook bottomRightPlace
 
+isChromiumScreenShareDialog :: Query Bool
+isChromiumScreenShareDialog = (isInfixOf "is sharing your screen.") <$> stringProperty "_NET_WM_NAME"
+
 myManageHook =
   composeAll
     [ myManageHookThunderbird
@@ -222,6 +226,7 @@ myManageHook =
     , windowNameAndClass "Media viewer" "TelegramDesktop" --> doFloat
     , windowRole "GtkFileChooserDialog" --> doDialogFloat
     , windowRole "PictureInPicture" --> bottomRightPlaceHook <+> doFloat
+    , isChromiumScreenShareDialog --> doSideFloat SC
     , manageDocks
     ]
 
